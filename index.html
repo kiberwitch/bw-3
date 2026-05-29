@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boardwave</title>
+</head>
+<body>
+
+<style>
+    /* ── Font ── */
+    @font-face {
+        font-family: 'DaMiOne-Regular';
+        src: url('DaMiOne-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'DaMiOne-Regular';
+        margin: 0 auto;
+        width: 1920px;
+        overflow-x: hidden;
+    }
+
+    /* Body scroll lock class */
+    body.no-scroll {
+        overflow: hidden;
+    }
+
+    /* ═══════════════════════════════
+       ROOT WRAPPER
+    ═══════════════════════════════ */
+    .root {
+        width: 1920px;
+        position: relative;
+        background: linear-gradient(180deg, #7049B3 0%, #332150 100%);
+        overflow: hidden;
+    }
+
+    /* ═══════════════════════════════
+       HEADER / NAV
+    ═══════════════════════════════ */
+    .site-header {
+        position: relative;
+        width: 100%;
+        height: 108px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 305px;
+        gap: 0;
+        z-index: 10;
+    }
+
+    .logo-accent {
+        width: 77px;
+        height: 34px;
+        margin-right: auto;
+        flex-shrink: 0;
+    }
+
+    .logo-accent img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .site-nav {
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        margin-right: auto;
+        
+    }
+
+    .site-nav a,
+    .site-nav span {
+        text-align: center;
+        color: white;
+        font-size: 23px;
+        font-family: DaMiOne-Regular;
+        font-weight: 400;
+        line-height: 14px;
+        letter-spacing: 2.30px;
+        word-wrap: break-word;
+        text-decoration: none;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .header-icons {
+        display: flex;
+        align-items: center;
+        gap: 29px;
+        flex-shrink: 0;
+    }
+
+    .icon-monitor {
+        width: 45px;
+        height: 45px;
+        overflow: hidden;
+    }
+
+    .icon-monitor img,
+    .icon-user img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .icon-user {
+        width: 38px;
+        height: 39px;
+        overflow: hidden;
+    }
+
+    /* Burger button (hidden on desktop) */
+    .burger-menu {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 32px;
+        height: 24px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 10;
+        flex-shrink: 0;
+    }
+
+    .burger-menu span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: white;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    /* Close button (hidden on desktop) */
+    .nav-close {
+        display: none;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 40px;
+        line-height: 1;
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 1002;
+    }
+
+    /* ═══════════════════════════════
+       HERO SECTION
+    ═══════════════════════════════ */
+    .hero-section {
+        position: relative;
+        width: 100%;
+        height: 787px;
+        margin-top: -108px;
+    }
+
+    .hero-img {
+        position: absolute;
+        width: 2052px;
+        height: 787px;
+        left: 0;
+        top: 0;
+        box-shadow: 0px 44px 100px 25px rgba(0, 0, 0, 0.25);
+        display: block;
+    }
+
+    .hero-content {
+        position: absolute;
+        left: 260px;
+        bottom: 160px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .brand-title {
+        color: black;
+        font-size: 85px;
+        font-family: DaMiOne-Regular;
+        font-weight: 400;
+        letter-spacing: 8.50px;
+        word-wrap: break-word;
+        line-height: 1;
+    }
+
+    .hero-subtitle {
+        width: 876px;
+        color: #2C2831;
+        font-size: 25px;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    .btn-cta {
+        width: 200px;
+        height: 62px;
+        padding: 16px 24px;
+        background: #FF582B;
+        border-radius: 90px;
+        outline: 1px #353945 solid;
+        outline-offset: -1px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+    }
+
+    .btn-cta__text {
+        text-align: center;
+        color: black;
+        font-size: 23px;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        line-height: 16px;
+    }
+
+    .frame-white {
+        position: absolute;
+        width: 817.91px;
+        height: 619px;
+        right: 5px;
+        top: 162px;
+    }
+
+    .frame-white img {
+        display: block;
+    }
+
+    .frame-orange-1 {
+        position: absolute;
+        left: 0px;
+        top: -30px;
+    }
+
+    .frame-orange-2 {
+        position: absolute;
+        right: 1px;
+        top: 0;
+    }
+
+    /* ═══════════════════════════════
+       HISTORY SECTION
+    ═══════════════════════════════ */
+    .history-section {
+        position: relative;
+        padding-top: 95px;
+        padding-bottom: 80px;
+        min-height: 620px;
+    }
+
+    .section-history {
+        display: block;
+        text-align: center;
+        color: #DFDFDF;
+        font-size: 70px;
+        font-family: DaMiOne-Regular;
+        font-weight: 400;
+        letter-spacing: 8.40px;
+        margin-bottom: 60px;
+        padding-left: 438px;
+    }
+
+    .history-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 310px;
+        position: relative;
+    }
+
+    .history-left,
+    .history-right {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .history-img-3 {
+        width: 428px;
+        height: 245px;
+        border-top-right-radius: 122.50px;
+        border-bottom-right-radius: 122.50px;
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .history-founding {
+        padding-top: 20px;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 27px;
+        line-height: 27px;
+        color: #DFDFDF;
+    }
+
+    .history-text {
+        width: 640px;
+        color: #DFDFDF;
+        font-size: 27px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        word-wrap: break-word;
+    }
+
+    .history-img-1 {
+        width: 656px;
+        height: 336px;
+        border-top-left-radius: 164.50px;
+        border-bottom-left-radius: 164.50px;
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .deco-rot-1 {
+        position: absolute;
+        right: 0;
+        top: 495px;
+    }
+
+    .deco-rot-3 {
+        position: absolute;
+        left: 0;
+        top: 13px;
+    }
+
+    .deco-rot-3 img {
+        display: block;
+    }
+
+    /* ═══════════════════════════════
+       TEAM SECTION
+    ═══════════════════════════════ */
+    .team-section {
+        position: relative;
+        padding-top: 60px;
+        padding-bottom: 80px;
+    }
+
+    .section-team {
+        display: block;
+        color: #DFDFDF;
+        font-size: 70px;
+        font-family: DaMiOne-Regular;
+        font-weight: 400;
+        letter-spacing: 8.40px;
+        padding-left: 317px;
+        margin-bottom: 70px;
+    }
+
+    .team-member {
+        display: flex;
+        align-items: flex-start;
+        padding: 0 310px;
+        margin-bottom: 60px;
+    }
+
+    .team-member--mark {
+        gap: 22px;
+    }
+
+    .team-mark-img {
+        width: 427px;
+        height: 277px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 138.50px;
+        flex-shrink: 0;
+        display: block;
+    }
+
+    .team-member__info {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding-top: 10px;
+    }
+
+    .team-member__name {
+        text-align: left;
+        color: #DFDFDF;
+        font-size: 32px;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        line-height: 40px;
+    }
+
+    .team-member__desc {
+        color: #DFDFDF;
+        font-size: 27px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        word-wrap: break-word;
+    }
+
+    .team-mark-desc { width: 806px; }
+    .team-kirill-desc { width: 786px; text-align: right; }
+    .team-david-desc { width: 771px; }
+
+    .team-member--kirill {
+        gap: 22px;
+        justify-content: center;
+    }
+
+    .team-kirill-img {
+        width: 420px;
+        height: 275px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 137.50px;
+        flex-shrink: 0;
+        display: block;
+    }
+
+    .team-member--david {
+        gap: 18px;
+    }
+
+    .team-david-img {
+        width: 422px;
+        height: 273px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 136.50px;
+        flex-shrink: 0;
+        display: block;
+    }
+
+    .deco-rot-2 {
+        position: absolute;
+        left: 0;
+        top: 1090px;
+    }
+
+    .deco-rot-4 {
+        position: absolute;
+        right: 0;
+        top: 900px;
+        overflow: hidden;
+    }
+
+    /* ═══════════════════════════════
+       ADVANTAGES SECTION
+    ═══════════════════════════════ */
+    .advantages-section {
+        position: relative;
+        padding-top: 70px;
+        padding-bottom: 80px;
+    }
+
+    .section-advantages {
+        display: block;
+        color: #FF582B;
+        font-size: 70px;
+        font-family: DaMiOne-Regular;
+        font-weight: 400;
+        letter-spacing: 8.40px;
+        padding-left: 547px;
+        margin-bottom: 40px;
+    }
+
+    .advantages-row {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        gap: 52px;
+        padding-left: 264px;
+        padding-top: 30px;
+    }
+
+    .advantage-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .adv-num {
+        color: #AF80FF;
+        font-size: 100px;
+        font-family: DaMiOne-Regular;
+        font-weight: 400;
+        letter-spacing: 12px;
+        line-height: 1;
+        margin-bottom: -40px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .advantage-card {
+        width: 441px;
+        height: 171px;
+        position: relative;
+        background: #F25533;
+        border-radius: 90px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .advantage-card__text {
+        position: absolute;
+        width: 343px;
+        left: 49px;
+        top: 32px;
+        text-align: center;
+        color: #DFDFDF;
+        font-size: 27px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        word-wrap: break-word;
+    }
+
+    .advantage-card__text--flex {
+        flex: 1 1 0;
+        text-align: center;
+        color: #DFDFDF;
+        font-size: 27px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        word-wrap: break-word;
+        padding: 44px 14px 50px 29px;
+    }
+
+    .advantage-card__text--3 {
+        position: absolute;
+        width: 380px;
+        height: 91px;
+        left: 31px;
+        top: 40px;
+        text-align: center;
+        color: #DFDFDF;
+        font-size: 27px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        word-wrap: break-word;
+    }
+
+    .mission-text {
+        width: 640px;
+        text-align: center;
+        color: #DFDFDF;
+        font-size: 27px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        word-wrap: break-word;
+        margin: 60px auto 0;
+    }
+
+    /* ═══════════════════════════════
+       TELEGRAM / BLOG CTA
+    ═══════════════════════════════ */
+    .telegram-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 60px 0 80px;
+        position: relative;
+    }
+
+    .telegram-text {
+        width: 1044px;
+        color: #DFDFDF;
+        font-size: 27px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    .btn-blog {
+        width: 200px;
+        height: 62px;
+        padding: 16px 24px;
+        border-radius: 90px;
+        outline: 1px #DFDFDF solid;
+        outline-offset: -1px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+    }
+
+    .btn-blog__text {
+        text-align: center;
+        color: #FCFCFD;
+        font-size: 23px;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        line-height: 16px;
+    }
+
+    .deco-orange {
+        position: absolute;
+        right: 0;
+        bottom: -65px;
+    }
+
+    .deco-purple {
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+    }
+
+    /* ═══════════════════════════════
+       FOOTER
+    ═══════════════════════════════ */
+    .footer {
+        width: 1937px;
+        height: 356px;
+        position: relative;
+        background: linear-gradient(90deg, #FC562D 0%, #5A3A91 100%);
+        color: #DFDFDF;
+        font-size: 25px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+    }
+
+    .footer__info-header { width: 329px; left: 307px; top: 31px; position: absolute; }
+    .footer__delivery { width: 329px; left: 309px; top: 77px; position: absolute; }
+    .footer__payment { width: 329px; left: 308px; top: 132px; position: absolute; }
+    .footer__agreement { width: 329px; left: 307px; top: 182px; position: absolute; }
+    .footer__privacy { width: 329px; left: 307px; top: 227px; position: absolute; }
+
+    .footer__support-header { width: 236px; left: 636px; top: 35px; position: absolute; }
+    .footer__cabinet { width: 220px; left: 640px; top: 82px; position: absolute; }
+    .footer__bookmarks { width: 220px; left: 639px; top: 131px; position: absolute; }
+    .footer__sitemap { width: 220px; left: 636px; top: 182px; position: absolute; }
+
+    .footer__extra-header { width: 220px; left: 969px; top: 33px; position: absolute; }
+    .footer__promo { width: 220px; left: 969px; top: 82px; position: absolute; }
+    .footer__new { width: 220px; left: 969px; top: 135px; position: absolute; }
+
+    .footer__contacts-title { width: 420px; left: 1237px; top: 35px; position: absolute; }
+
+    .footer__contact-row {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #DFDFDF;
+        font-size: 25px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+    }
+
+    .footer__contact-row img {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+    }
+
+    .footer__row-phone { left: 1237px; top: 82px; }
+    .footer__row-email { left: 1237px; top: 133px; }
+    .footer__row-address { left: 1237px; top: 190px; flex-direction: column; align-items: flex-start; gap: 6px; }
+    .footer__row-orders { left: 1237px; top: 287px; }
+
+    .footer__address-header {
+        font-size: 25px;
+        font-family: 'Open Sans', sans-serif;
+        color: #DFDFDF;
+    }
+
+    /* ═══════════════════════════════
+       MOBILE / TABLET
+    ═══════════════════════════════ */
+    @media (max-width: 768px) {
+        .root {
+            width: 100%;
+        }
+
+        body {
+            width: 100%;
+        }
+
+        /* Header */
+        .site-header {
+            height: auto;
+            padding: 16px 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+        }
+
+        .logo-accent {
+            margin-right: 0;
+        }
+
+        /* Show burger, hide default nav */
+        .burger-menu {
+            display: flex;
+        }
+
+        .site-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background: #332150;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 80px 30px 30px;
+            gap: 30px;
+            margin-right: 0;
+            z-index: 1000;
+            transition: right 0.35s ease;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .site-nav.active {
+            right: 0;
+        }
+
+        .site-nav span {
+            font-size: 20px;
+        }
+
+        .nav-close {
+            display: block;
+        }
+
+        .header-icons {
+            gap: 16px;
+        }
+
+        /* Hero */
+        .hero-section {
+            height: auto;
+            min-height: 400px;
+            margin-top: 0;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            left: auto;
+            bottom: auto;
+            padding: 30px 20px;
+            align-items: flex-start;
+        }
+
+        .brand-title { font-size: 40px; letter-spacing: 3px; }
+        .hero-subtitle {
+           width: 350px; 
+           font-size: 16px;
+           text-align: left;
+           }
+
+        .frame-white, .frame-orange-1, .frame-orange-2 { display: none; }
+
+        /* History */
+        .history-section {
+            padding: 40px 0;
+            min-height: auto;
+        }
+
+        .section-history {
+            font-size: 36px;
+            padding-left: 0;
+            text-align: center;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
+        .history-layout {
+            padding: 0 20px;
+            gap: 20px;
+        }
+
+        .history-left,
+        .history-right {
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .history-img-3 { width: 100%; height: auto; }
+        .history-img-1 { width: 100%; height: auto; }
+        .history-text { width: 100%; font-size: 16px; }
+        .history-founding { font-size: 16px; padding-top: 0; }
+
+        .deco-rot-1, .deco-rot-3 { display: none; }
+
+        /* Team */
+        .team-section { padding: 30px 0; }
+
+        .section-team {
+            font-size: 36px;
+            padding-left: 20px;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
+        .team-member {
+            flex-direction: column;
+            padding: 0 20px;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .team-member--kirill { flex-direction: column-reverse; }
+
+        .team-mark-img,
+        .team-kirill-img,
+        .team-david-img {
+            width: 100%;
+            height: auto;
+        }
+
+        .team-mark-desc,
+        .team-kirill-desc,
+        .team-david-desc {
+            width: 100%;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .team-member__name { font-size: 24px; }
+        .deco-rot-2, .deco-rot-4 { display: none; }
+
+        /* Advantages */
+        .advantages-section { padding: 30px 0; }
+
+        .section-advantages {
+            font-size: 36px;
+            padding-left: 20px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .advantages-row {
+            flex-direction: column;
+            padding-left: 20px;
+            padding-right: 20px;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .advantage-card { width: 100%; max-width: 400px; }
+        .adv-num { font-size: 60px; }
+
+        .advantage-card__text,
+        .advantage-card__text--3 {
+            position: static;
+            width: 100%;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        .advantage-card__text--flex { font-size: 16px; }
+        .mission-text { width: 90%; font-size: 16px; }
+
+        /* Telegram */
+        .telegram-section { padding: 40px 20px; }
+        .telegram-text { width: 100%; font-size: 16px; }
+        .deco-orange, .deco-purple { display: none; }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            height: auto;
+            padding: 30px 20px;
+        }
+
+        .footer__info-header,
+        .footer__delivery,
+        .footer__payment,
+        .footer__agreement,
+        .footer__privacy,
+        .footer__support-header,
+        .footer__cabinet,
+        .footer__bookmarks,
+        .footer__sitemap,
+        .footer__extra-header,
+        .footer__promo,
+        .footer__new,
+        .footer__contacts-title,
+        .footer__contact-row {
+            position: static;
+            width: auto;
+        }
+
+        .footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 30px;
+        }
+
+        .footer__contacts-title { grid-column: 1 / -1; margin-top: 16px; }
+        .footer__contact-row { grid-column: 1 / -1; }
+        .footer__info-header,
+        .footer__support-header,
+        .footer__extra-header { font-weight: 700; margin-top: 12px; }
+    }
+
+    /* Overlay when menu is open */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .nav-overlay.active {
+        display: block;
+    }
+</style>
+
+<div class="root">
+
+    <!-- ══ HEADER ══ -->
+    <header class="site-header">
+        <div class="logo-accent">
+            <img src="logo.png" alt="Boardwave logo">
+        </div>
+
+        <!-- Burger Button -->
+        <button class="burger-menu" id="burgerBtn" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+            
+        </button>
+
+        <!-- Overlay -->
+        <div class="nav-overlay" id="navOverlay"></div>
+
+        <nav class="site-nav" id="mainNav">
+            <!-- Close Button -->
+            <button class="nav-close" id="navClose" aria-label="Закрыть меню">&times;</button>
+            <span>О нас</span>
+            <span>Каталог</span>
+            <span>Отзывы</span>
+            <span>Контакты</span>
+            <div class="header-icons">
+            <div class="icon-monitor"><img src="shop.png" alt="shop"></div>
+            <div class="icon-user"><img src="user.png" alt="user"></div>
+        </div>
+        </nav>
+
+        
+    </header>
+
+    <!-- ══ HERO ══ -->
+    <section class="hero-section">
+        <img class="hero-img" src="hero.jpg" alt="Hero background">
+        <div class="frame-white"><img src="line-3.png" alt=""></div>
+        <div class="frame-orange-1"><img src="line.png" alt=""></div>
+        <div class="frame-orange-2"><img src="line-2.png" alt=""></div>
+        <div class="hero-content">
+            <div class="brand-title">BOARDWAvE</div>
+            <div class="hero-subtitle">
+                Boardwave — магазин, где можно найти всё самое необходимое
+                для катания на скейтборде, независимо от того, новичок вы или профессионал.
+            </div>
+            <div class="btn-cta">
+                <div class="btn-cta__text">К товарам</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ HISTORY ══ -->
+    <section class="history-section">
+        <div class="deco-rot-3"><img src="skateboard.png" alt=""></div>
+        <div class="deco-rot-1"><img src="skateboard-2.png" alt=""></div>
+        <div class="section-history">наша история</div>
+        <div class="history-layout">
+            <div class="history-left">
+                <img class="history-img-3" src="photo-1.jpg" alt="">
+                <div class="history-founding">
+                    Наша компания основана в 2012 году Марком Страховым и Мишей Волковым, двумя друзьями и поклонниками скейтбординга.<br>
+                    Всё началось с продажи досок и ремонта скейтбордов на заказ.
+                </div>
+            </div>
+            <div class="history-right">
+                <div class="history-text">
+                    Через некоторое время была создана команда, к нам присоединились люди, желающие поддержать начинающий бренд. Компанию назвали Boardwave, легко и лаконично, чтобы быстро запоминалась. Тогда, в 2011 году, молодые парни даже не подразумевали, что их идея воплотится в создание целого успешного маркетплейса.
+                </div>
+                <img class="history-img-1" src="photo-2.png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ TEAM ══ -->
+    <section class="team-section">
+        <div class="deco-rot-2"><img src="skateboard-4.png" alt=""></div>
+        <div class="deco-rot-4"><img src="skateboard-3.png" alt=""></div>
+        <div class="section-team">наша команда</div>
+
+        <div class="team-member team-member--mark">
+            <img class="team-mark-img" src="photo-3.jpg" alt="Марк Страхов">
+            <div class="team-member__info">
+                <div class="team-member__name">Марк Страхов</div>
+                <div class="team-member__desc team-mark-desc">
+                    Один из создателей бренда родом из Санкт-Петербурга, руководитель компании. Следит за логистикой маркетплейса, знает всё о моделях скейтбордов и их сборке. Марк позаботится о том, чтобы вы точно остались довольны сделанным заказом.
+                </div>
+            </div>
+        </div>
+
+        <div class="team-member team-member--kirill">
+            <div class="team-member__info" style="align-items:flex-end;">
+                <div class="team-member__name">Кирилл Левин</div>
+                <div class="team-member__desc team-kirill-desc">
+                    Кирилл увлекается скейтбордингом уже более 11 лет, отвечает за сборку и ремонт запчастей для скейтбордов. Подскажет, какой скейтборд лучше выбрать именно вам,<br>а также даст инструкцию, как самому собрать модель.
+                </div>
+            </div>
+            <img class="team-kirill-img" src="photo-4.jpg" alt="Кирилл Левин">
+        </div>
+
+        <div class="team-member team-member--david">
+            <img class="team-david-img" src="photo-5.jpg" alt="Давид Мальцев">
+            <div class="team-member__info">
+                <div class="team-member__name">Давид Мальцев</div>
+                <div class="team-member__desc team-david-desc">
+                    Давид с самого детства участвует в соревнованиях по скейтбордингу. На нашем сайте представлена коллекция видеогайдов, записанных Давидом, где он подробно рассказывает про трюки и дает советы, как быстрее научиться сохранять баланс, выполняя тот или иной элемент.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ ADVANTAGES ══ -->
+    <section class="advantages-section">
+        <div class="section-advantages">ПРЕИМУЩЕСТВА</div>
+        <div class="mission-text">
+            Мы всегда стараемся подстроиться под каждого покупателя. Наша миссия — обеспечение вашего доверия. Искренность и надежность — ключевые слова бренда.
+        </div>
+        <div class="advantages-row">
+            <div class="advantage-item">
+                <div class="adv-num">1</div>
+                <div class="advantage-card">
+                    <div class="advantage-card__text">Компания позиционирует себя как наставник и всегда поможет новичкам.</div>
+                </div>
+            </div>
+            <div class="advantage-item">
+                <div class="adv-num">2</div>
+                <div class="advantage-card">
+                    <div class="advantage-card__text--flex">Используем только высококачественные материалы</div>
+                </div>
+            </div>
+            <div class="advantage-item">
+                <div class="adv-num">3</div>
+                <div class="advantage-card">
+                    <div class="advantage-card__text--3">Ваша доска — как отпечаток пальца. На сайте есть возможность создать собственный дизайн!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ TELEGRAM / BLOG ══ -->
+    <div class="telegram-section">
+        <div class="deco-orange"><img src="deko_orange.png" alt=""></div>
+        <div class="deco-purple"><img src="deko_purple.png" alt=""></div>
+        <div class="telegram-text">У нас также есть канал в телеграме, где мы делимся актуальными новостями:</div>
+        <div class="btn-blog">
+            <div class="btn-blog__text">Блог</div>
+        </div>
+    </div>
+
+    <!-- ══ FOOTER ══ -->
+    <div class="footer">
+        <div class="footer__info-header">Информация</div>
+        <div class="footer__delivery">Доставка</div>
+        <div class="footer__payment">Оплата</div>
+        <div class="footer__agreement">Условия соглашения</div>
+        <div class="footer__privacy">Политика безопасности</div>
+
+        <div class="footer__support-header">Служба поддержки</div>
+        <div class="footer__cabinet">Личный кабинет</div>
+        <div class="footer__bookmarks">Закладки</div>
+        <div class="footer__sitemap">Карта сайта</div>
+
+        <div class="footer__extra-header">Дополнительно</div>
+        <div class="footer__promo">Акции</div>
+        <div class="footer__new">Новинки</div>
+
+        <div class="footer__contacts-title">Наши контакты:</div>
+
+        <div class="footer__contact-row footer__row-phone">
+            <img src="phone.png" alt="Телефон">
+            <span>+7 (964) 828-58-11</span>
+        </div>
+
+        <div class="footer__contact-row footer__row-email">
+            <img src="mail.png" alt="Email">
+            <span>boardwave@contact.ru</span>
+        </div>
+
+        <div class="footer__contact-row footer__row-address">
+            <span class="footer__address-header">Наш адрес:</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <img src="location.png" alt="Адрес">
+                <span>г. Москва, Малый проезд 5</span>
+            </div>
+        </div>
+
+        <div class="footer__contact-row footer__row-orders">
+            <img src="clock.png" alt="Часы">
+            <span>Заказы через корзину 24/7</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    (function() {
+        const burgerBtn = document.getElementById('burgerBtn');
+        const mainNav = document.getElementById('mainNav');
+        const navClose = document.getElementById('navClose');
+        const navOverlay = document.getElementById('navOverlay');
+        const navLinks = mainNav.querySelectorAll('span');
+        const body = document.body;
+
+        function openMenu() {
+            mainNav.classList.add('active');
+            navOverlay.classList.add('active');
+            body.classList.add('no-scroll');
+        }
+
+        function closeMenu() {
+            mainNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            body.classList.remove('no-scroll');
+        }
+
+        if (burgerBtn) {
+            burgerBtn.addEventListener('click', openMenu);
+        }
+
+        if (navClose) {
+            navClose.addEventListener('click', closeMenu);
+        }
+
+        if (navOverlay) {
+            navOverlay.addEventListener('click', closeMenu);
+        }
+
+        // Close menu when any nav link is clicked
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    })();
+</script>
+
+</body>
+</html>
