@@ -1,126 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Boardwave</title>
-</head>
-<body>
-
-<style>
-    /* ── Font ── */
-    @font-face {
-        font-family: 'DaMiOne-Regular';
-        src: url('DaMiOne-Regular.ttf') format('truetype');
+    <style>
+      @font-face {
+        font-family: "DaMiOne-Regular";
+        src: url("DaMiOne-Regular.ttf") format("truetype");
         font-weight: 400;
         font-style: normal;
         font-display: swap;
-    }
+      }
 
-    /* ── Reset & base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-        font-family: 'DaMiOne-Regular';
-        margin: 0 auto;
-        width: 1920px;
+      html,
+      body {
+        max-width: 100%;
         overflow-x: hidden;
-    }
+      }
 
-    /* Body scroll lock class */
-    body.no-scroll {
-        overflow: hidden;
-    }
-
-    /* ═══════════════════════════════
-       ROOT WRAPPER
-    ═══════════════════════════════ */
-    .root {
-        width: 1920px;
-        position: relative;
-        background: linear-gradient(180deg, #7049B3 0%, #332150 100%);
-        overflow: hidden;
-    }
-
-    /* ═══════════════════════════════
-       HEADER / NAV
-    ═══════════════════════════════ */
-    .site-header {
-        position: relative;
+      body {
+        font-family: "DaMiOne-Regular", sans-serif;
         width: 100%;
+        max-width: 1920px;
+        margin: 0 auto;
+        overflow-x: hidden;
+      }
+
+      body.no-scroll {
+        overflow: hidden;
+      }
+
+      .root {
+        width: 100%;
+        position: relative;
+        background: linear-gradient(180deg, #7049b3 0%, #332150 100%);
+        overflow: hidden;
+      }
+
+      /* ═══════════════════════════════
+         HEADER
+      ═══════════════════════════════ */
+      .site-header {
+        width: 1200px;
+        margin: 0 auto;
         height: 108px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 0 305px;
+        justify-content: space-between;
         gap: 0;
+        position: relative;
         z-index: 10;
-    }
+      }
 
-    .logo-accent {
+      .logo-accent {
         width: 77px;
         height: 34px;
-        margin-right: auto;
         flex-shrink: 0;
-    }
+      }
 
-    .logo-accent img {
+      .logo-accent img {
         width: 100%;
         height: 100%;
         display: block;
-    }
+      }
 
-    .site-nav {
+      .site-nav {
         display: flex;
         align-items: center;
-        gap: 60px;
-        margin-right: auto;
-        
-    }
+        gap: clamp(20px, 3vw, 60px);
+        flex: 1;
+        justify-content: center;
+      }
 
-    .site-nav a,
-    .site-nav span {
-        text-align: center;
+      .site-nav a,
+      .site-nav > span {
         color: white;
-        font-size: 23px;
-        font-family: DaMiOne-Regular;
+        font-size: clamp(16px, 1.2vw, 23px);
+        font-family: "DaMiOne-Regular", sans-serif;
         font-weight: 400;
         line-height: 14px;
-        letter-spacing: 2.30px;
-        word-wrap: break-word;
+        letter-spacing: 2.3px;
         text-decoration: none;
         white-space: nowrap;
         cursor: pointer;
-    }
+      }
 
-    .header-icons {
+      .header-icons {
         display: flex;
         align-items: center;
         gap: 29px;
         flex-shrink: 0;
-    }
+      }
 
-    .icon-monitor {
+      .icon-monitor {
         width: 45px;
         height: 45px;
         overflow: hidden;
-    }
+      }
 
-    .icon-monitor img,
-    .icon-user img {
-        width: 100%;
-        height: 100%;
-        display: block;
-    }
-
-    .icon-user {
+      .icon-user {
         width: 38px;
         height: 39px;
         overflow: hidden;
-    }
+      }
 
-    /* Burger button (hidden on desktop) */
-    .burger-menu {
+      .icon-monitor img,
+      .icon-user img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .burger-menu {
         display: none;
         flex-direction: column;
         justify-content: space-around;
@@ -132,19 +132,18 @@
         padding: 0;
         z-index: 10;
         flex-shrink: 0;
-    }
+      }
 
-    .burger-menu span {
+      .burger-menu span {
         display: block;
         width: 100%;
         height: 3px;
         background: white;
         border-radius: 3px;
         transition: all 0.3s ease;
-    }
+      }
 
-    /* Close button (hidden on desktop) */
-    .nav-close {
+      .nav-close {
         display: none;
         background: transparent;
         border: none;
@@ -156,760 +155,789 @@
         top: 20px;
         right: 20px;
         z-index: 1002;
-    }
+      }
 
+      .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
 
-
-
-/* ═══════════════════════════════
-   HERO SECTION
-═══════════════════════════════ */
-
-.hero-section-blog {
-    position: relative;
-    width: 100%;
-    height: 787px;
-    margin-top: 120px;
-    overflow: hidden;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Фон */
-.hero-img-blog {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    box-shadow: 0px 44px 100px 25px rgba(0, 0, 0, 0.25);
-    z-index: 1;
-}
-
-/* Левая фотка */
-.hero-photo-left {
-    position: relative;
-    z-index: 2;
-
-   
-}
-
-/* Правая фотка */
-.hero-photo-right {
-    position: relative;
-    z-index: 2;
-
-
-}
-
-/* Центральный блок */
-.hero-content-blog {
-    position: relative;
-    z-index: 2;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-}
-
-/* Лого */
-.hero-logo {
-   
-}
-
-/* Заголовок */
-.hero-title {
- 
-    margin: 0;
-
-
-
-
-font-family: 'Open Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 40px;
-line-height: 24px;
-
-
-color: #FFFFFF;
-
-
-}
-
-/* Кнопка */
-.btn-cta {
-    width: 200px;
-    height: 62px;
-    padding: 16px 24px;
-    background: #FF582B;
-    border-radius: 90px;
-    outline: 1px #353945 solid;
-    outline-offset: -1px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
-}
-
-.btn-cta__text {
-    color: black;
-    font-size: 23px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    line-height: 16px;
-}
-
-
-    /* ═══════════════════════════════
-       HISTORY SECTION
-    ═══════════════════════════════ */
-    .history-section {
-        position: relative;
-        padding-top: 95px;
-        padding-bottom: 80px;
-        min-height: 620px;
-    }
-
-    .section-history {
+      .nav-overlay.active {
         display: block;
-        text-align: center;
-        color: #DFDFDF;
-        font-size: 70px;
-        font-family: DaMiOne-Regular;
-        font-weight: 400;
-        letter-spacing: 8.40px;
-        margin-bottom: 60px;
-        padding-left: 438px;
-    }
+      }
 
-    .history-layout {
+      /* ═══════════════════════════════
+         NAVBAR (search bar)
+      ═══════════════════════════════ */
+      .navbar {
+        width: 100%;
+        max-width: 1301px;
+        height: 48.7px;
+        margin: 0 auto;
+        padding: 0 clamp(16px, 2vw, 0px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .navbar__location {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #dfdfdf;
+        font-size: clamp(14px, 1.3vw, 25px);
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400;
+        line-height: 24px;
+      }
+
+      .navbar__right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .navbar__search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: clamp(200px, 35vw, 477px);
+        height: 48.7px;
+        background: #af80ff;
+        border-radius: 10px;
+        padding: 0 14px;
+      }
+
+      .navbar__search-text {
+        color: black;
+        font-size: clamp(14px, 1vw, 20px);
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400;
+        line-height: 24px;
+      }
+
+      .navbar__burger-bg {
+        width: 52px;
+        height: 48.7px;
+        background: #dfdfdf;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      /* ═══════════════════════════════
+         HERO
+      ═══════════════════════════════ */
+      .hero-section-blog {
+        position: relative;
+        width: 100%;
+        height: 787px;
+        margin-top: 120px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-img-blog {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        box-shadow: 0px 44px 100px 25px rgba(0, 0, 0, 0.25);
+        z-index: 1;
+      }
+
+      .hero-photo-left,
+      .hero-photo-right {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-content-blog {
+        position: relative;
+        z-index: 2;
         display: flex;
         flex-direction: column;
-        gap: 30px;
-        padding: 0 310px;
-        position: relative;
-    }
-
-    .history-left,
-    .history-right {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
         align-items: center;
-    }
+        gap: 30px;
+      }
 
-    .history-img-3 {
-        width: 428px;
-        height: 245px;
-        border-top-right-radius: 122.50px;
-        border-bottom-right-radius: 122.50px;
-        display: block;
-        flex-shrink: 0;
-    }
-
-    .history-founding {
-        padding-top: 20px;
-        font-family: 'Open Sans';
+      .hero-title {
+        margin: 0;
+        font-family: "Open Sans", sans-serif;
         font-style: normal;
         font-weight: 400;
-        font-size: 27px;
-        line-height: 27px;
-        color: #DFDFDF;
-    }
+        font-size: 40px;
+        line-height: 24px;
+        color: #ffffff;
+      }
 
-    .history-text {
-        width: 640px;
-        color: #DFDFDF;
-        font-size: 27px;
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 400;
-        line-height: 27px;
-        word-wrap: break-word;
-    }
-
-    .history-img-1 {
-        width: 656px;
-        height: 336px;
-        border-top-left-radius: 164.50px;
-        border-bottom-left-radius: 164.50px;
-        display: block;
-        flex-shrink: 0;
-    }
-
-    .deco-rot-1 {
-        position: absolute;
-        right: 0;
-        top: 495px;
-    }
-
-    .deco-rot-3 {
-        position: absolute;
-        left: 0;
-        top: 13px;
-    }
-
-    .deco-rot-3 img {
-        display: block;
-    }
-
-    /* ═══════════════════════════════
-       TEAM SECTION
-    ═══════════════════════════════ */
-    .team-section {
-        position: relative;
-        padding-top: 60px;
-        padding-bottom: 80px;
-    }
-
-    .section-team {
-        display: block;
-        color: #DFDFDF;
-        font-size: 70px;
-        font-family: DaMiOne-Regular;
-        font-weight: 400;
-        letter-spacing: 8.40px;
-        padding-left: 317px;
-        margin-bottom: 70px;
-    }
-
-    .team-member {
-        display: flex;
-        align-items: flex-start;
-        padding: 0 310px;
-        margin-bottom: 60px;
-    }
-
-    .team-member--mark {
-        gap: 22px;
-    }
-
-    .team-mark-img {
-        width: 427px;
-        height: 277px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 138.50px;
-        flex-shrink: 0;
-        display: block;
-    }
-
-    .team-member__info {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        padding-top: 10px;
-    }
-
-    .team-member__name {
-        text-align: left;
-        color: #DFDFDF;
-        font-size: 32px;
-        font-family: 'DM Sans', sans-serif;
-        font-weight: 700;
-        line-height: 40px;
-    }
-
-    .team-member__desc {
-        color: #DFDFDF;
-        font-size: 27px;
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 400;
-        line-height: 27px;
-        word-wrap: break-word;
-    }
-
-    .team-mark-desc { width: 806px; }
-    .team-kirill-desc { width: 786px; text-align: right; }
-    .team-david-desc { width: 771px; }
-
-    .team-member--kirill {
-        gap: 22px;
-        justify-content: center;
-    }
-
-    .team-kirill-img {
-        width: 420px;
-        height: 275px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom-left-radius: 137.50px;
-        flex-shrink: 0;
-        display: block;
-    }
-
-    .team-member--david {
-        gap: 18px;
-    }
-
-    .team-david-img {
-        width: 422px;
-        height: 273px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 136.50px;
-        flex-shrink: 0;
-        display: block;
-    }
-
-    .deco-rot-2 {
-        position: absolute;
-        left: 0;
-        top: 1090px;
-    }
-
-    .deco-rot-4 {
-        position: absolute;
-        right: 0;
-        top: 900px;
-        overflow: hidden;
-    }
-
-    /* ═══════════════════════════════
-       ADVANTAGES SECTION
-    ═══════════════════════════════ */
-    .advantages-section {
-        position: relative;
-        padding-top: 70px;
-        padding-bottom: 80px;
-    }
-
-    .section-advantages {
-        display: block;
-        color: #FF582B;
-        font-size: 70px;
-        font-family: DaMiOne-Regular;
-        font-weight: 400;
-        letter-spacing: 8.40px;
-        padding-left: 547px;
-        margin-bottom: 40px;
-    }
-
-    .advantages-row {
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-end;
-        gap: 52px;
-        padding-left: 264px;
-        padding-top: 30px;
-    }
-
-    .advantage-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .adv-num {
-        color: #AF80FF;
-        font-size: 100px;
-        font-family: DaMiOne-Regular;
-        font-weight: 400;
-        letter-spacing: 12px;
-        line-height: 1;
-        margin-bottom: -40px;
-        position: relative;
-        z-index: 1;
-    }
-
-    .advantage-card {
-        width: 441px;
-        height: 171px;
-        position: relative;
-        background: #F25533;
+      .btn-cta {
+        width: 200px;
+        height: 62px;
+        padding: 16px 24px;
+        background: #ff582b;
         border-radius: 90px;
+        outline: 1px #353945 solid;
+        outline-offset: -1px;
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-shrink: 0;
-    }
+        cursor: pointer;
+        border: none;
+      }
 
-    .advantage-card__text {
-        position: absolute;
-        width: 343px;
-        left: 49px;
-        top: 32px;
-        text-align: center;
-        color: #DFDFDF;
-        font-size: 27px;
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 400;
-        line-height: 27px;
-        word-wrap: break-word;
-    }
+      .btn-cta__text {
+        color: black;
+        font-size: 23px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        line-height: 16px;
+      }
 
-    .advantage-card__text--flex {
-        flex: 1 1 0;
-        text-align: center;
-        color: #DFDFDF;
-        font-size: 27px;
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 400;
-        line-height: 27px;
-        word-wrap: break-word;
-        padding: 44px 14px 50px 29px;
-    }
-
-    .advantage-card__text--3 {
-        position: absolute;
-        width: 380px;
-        height: 91px;
-        left: 31px;
-        top: 40px;
-        text-align: center;
-        color: #DFDFDF;
-        font-size: 27px;
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 400;
-        line-height: 27px;
-        word-wrap: break-word;
-    }
-
-    .mission-text {
-        width: 640px;
-        text-align: center;
-        color: #DFDFDF;
-        font-size: 27px;
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 400;
-        line-height: 27px;
-        word-wrap: break-word;
-        margin: 60px auto 0;
-    }
-
-    /* ═══════════════════════════════
-       TELEGRAM / BLOG CTA
-    ═══════════════════════════════ */
-    .telegram-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        padding: 60px 0 80px;
-        position: relative;
-    }
-
-    .telegram-text {
-        width: 1044px;
-        color: #DFDFDF;
-        font-size: 27px;
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 400;
-        line-height: 27px;
-        text-align: center;
-        word-wrap: break-word;
-    }
-
-    .btn-blog {
+      .btn-blog {
         width: 200px;
         height: 62px;
         padding: 16px 24px;
         border-radius: 90px;
-        outline: 1px #DFDFDF solid;
+        outline: 1px #dfdfdf solid;
         outline-offset: -1px;
         display: inline-flex;
         justify-content: center;
         align-items: center;
         gap: 12px;
         cursor: pointer;
-    }
+        background: transparent;
+        border: none;
+      }
 
-    .btn-blog__text {
+      .btn-blog__text {
         text-align: center;
-        color: #FCFCFD;
+        color: #fcfcfd;
         font-size: 23px;
-        font-family: 'DM Sans', sans-serif;
+        font-family: "DM Sans", sans-serif;
         font-weight: 700;
         line-height: 16px;
-    }
+      }
 
-    .deco-orange {
+      .load-more-btn {
+        width: clamp(260px, 35vw, 473px);
+        height: 84px;
+        padding: 0 16px;
+        border-radius: 90px;
+        border: 1px solid #777e90;
+        background: transparent;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        margin-top: 100px;
+        color: #dfdfdf;
+        font-size: 25px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        line-height: 16px;
+      }
+
+      /* ═══════════════════════════════
+         DECKS SECTION
+      ═══════════════════════════════ */
+      .decks-section {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 100px;
+        padding: 0 clamp(16px, 2%, 32px);
+      }
+
+      .decks-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .decks-title {
+        font-size: clamp(36px, 4vw, 64px);
+        font-weight: 900;
+        color: #ff582b;
+        letter-spacing: 8px;
+        line-height: 1;
+        margin-bottom: 24px;
+        font-family: "DaMiOne-Regular", sans-serif;
+      }
+
+      .decks-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 311px));
+        gap: 20px;
+      }
+
+      /* ═══════════════════════════════
+         CARDS
+      ═══════════════════════════════ */
+      .deck-card,
+      .popular-card {
+        width: 100%;
+        max-width: 311px;
+        height: 511px;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: #6b3fa0;
+      }
+
+      .deck-card__image,
+      .popular-card__image {
+        width: 100%;
+        height: 273px;
+        object-fit: cover;
+        display: block;
+        flex-shrink: 0;
+        border-radius: 18px 18px 0 0;
+        background-color: white;
+      }
+
+      .deck-card__body,
+      .popular-card__body {
+        padding: 16px 14px 20px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .deck-card__name,
+      .popular-card__name {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 400;
+        font-size: 25px;
+        line-height: 27px;
+        color: #dfdfdf;
+      }
+
+      .deck-card__price,
+      .popular-card__price {
+        color: #dfdfdf;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 27px;
+        padding-top: 20px;
+      }
+
+      .deck-card__actions,
+      .popular-card__actions {
+        display: flex;
+        gap: 8px;
+        margin-top: auto;
+        margin-left: auto;
+      }
+
+      .deck-card__btn,
+      .popular-card__btn {
+        width: 56px;
+        height: 51px;
+        background: #af80ff;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+        flex-shrink: 0;
+      }
+
+      .deck-card__btn img,
+      .popular-card__btn img {
+        width: 36px;
+        height: 36px;
+      }
+
+      /* ═══════════════════════════════
+         POPULAR SECTION
+      ═══════════════════════════════ */
+      .popular-section {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 100px;
+        padding: 0 clamp(16px, 2%, 32px);
+      }
+
+      .popular-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .popular-title {
+        font-size: clamp(36px, 4vw, 64px);
+        font-weight: 400;
+        color: #ff582b;
+        letter-spacing: 8px;
+        line-height: 1;
+        margin-bottom: 24px;
+        font-family: "DaMiOne-Regular", sans-serif;
+      }
+
+      .popular-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 311px));
+        gap: 20px;
+      }
+
+      /* ═══════════════════════════════
+         BG DECORATIONS
+      ═══════════════════════════════ */
+      .bg-wrapper {
+        position: relative;
+      }
+
+      .bg-img-1 {
+        position: absolute;
+        top: -2000px;
+      }
+
+      .bg-img-2 {
+        position: absolute;
+        right: 0;
+        top: -2000px;
+      }
+
+      .bg-img-3 {
+        position: absolute;
+        top: -1250px;
+      }
+
+      .bg-img-4 {
+        position: absolute;
+        right: 0;
+        top: -1000px;
+      }
+
+      /* ═══════════════════════════════
+         TELEGRAM
+      ═══════════════════════════════ */
+      .telegram-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 60px 0 80px;
+        position: relative;
+      }
+
+      .telegram-text {
+        width: clamp(300px, 80vw, 1044px);
+        color: #dfdfdf;
+        font-size: 27px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400;
+        line-height: 27px;
+        text-align: center;
+      }
+
+      .deco-orange {
         position: absolute;
         right: 0;
         bottom: -65px;
-    }
+      }
 
-    .deco-purple {
+      .deco-purple {
         position: absolute;
         left: 0;
         bottom: -5px;
-    }
+      }
 
-    /* ═══════════════════════════════
-       FOOTER
-    ═══════════════════════════════ */
-    .footer {
-        width: 1937px;
-        height: 356px;
+      /* ═══════════════════════════════
+         FOOTER
+      ═══════════════════════════════ */
+      .footer {
+        width: 100%;
+        min-height: 356px;
         position: relative;
-        background: linear-gradient(90deg, #FC562D 0%, #5A3A91 100%);
-        color: #DFDFDF;
+        background: linear-gradient(90deg, #fc562d 0%, #5a3a91 100%);
+        color: #dfdfdf;
         font-size: 25px;
-        font-family: 'Open Sans', sans-serif;
+        font-family: "Open Sans", sans-serif;
         font-weight: 400;
         line-height: 27px;
-    }
+      }
 
-    .footer__info-header { width: 329px; left: 307px; top: 31px; position: absolute; }
-    .footer__delivery { width: 329px; left: 309px; top: 77px; position: absolute; }
-    .footer__payment { width: 329px; left: 308px; top: 132px; position: absolute; }
-    .footer__agreement { width: 329px; left: 307px; top: 182px; position: absolute; }
-    .footer__privacy { width: 329px; left: 307px; top: 227px; position: absolute; }
+      .footer__info-header { width: 329px; left: 307px; top: 31px; position: absolute; }
+      .footer__delivery    { width: 329px; left: 309px; top: 77px;  position: absolute; }
+      .footer__payment     { width: 329px; left: 308px; top: 132px; position: absolute; }
+      .footer__agreement   { width: 329px; left: 307px; top: 182px; position: absolute; }
+      .footer__privacy     { width: 329px; left: 307px; top: 227px; position: absolute; }
 
-    .footer__support-header { width: 236px; left: 636px; top: 35px; position: absolute; }
-    .footer__cabinet { width: 220px; left: 640px; top: 82px; position: absolute; }
-    .footer__bookmarks { width: 220px; left: 639px; top: 131px; position: absolute; }
-    .footer__sitemap { width: 220px; left: 636px; top: 182px; position: absolute; }
+      .footer__support-header { width: 236px; left: 636px; top: 35px;  position: absolute; }
+      .footer__cabinet        { width: 220px; left: 640px; top: 82px;  position: absolute; }
+      .footer__bookmarks      { width: 220px; left: 639px; top: 131px; position: absolute; }
+      .footer__sitemap        { width: 220px; left: 636px; top: 182px; position: absolute; }
 
-    .footer__extra-header { width: 220px; left: 969px; top: 33px; position: absolute; }
-    .footer__promo { width: 220px; left: 969px; top: 82px; position: absolute; }
-    .footer__new { width: 220px; left: 969px; top: 135px; position: absolute; }
+      .footer__extra-header { width: 220px; left: 969px; top: 33px;  position: absolute; }
+      .footer__promo        { width: 220px; left: 969px; top: 82px;  position: absolute; }
+      .footer__new          { width: 220px; left: 969px; top: 135px; position: absolute; }
 
-    .footer__contacts-title { width: 420px; left: 1237px; top: 35px; position: absolute; }
+      .footer__contacts-title { width: 420px; left: 1237px; top: 35px; position: absolute; }
 
-    .footer__contact-row {
+      .footer__contact-row {
         position: absolute;
         display: flex;
         align-items: center;
         gap: 10px;
-        color: #DFDFDF;
+        color: #dfdfdf;
         font-size: 25px;
-        font-family: 'Open Sans', sans-serif;
+        font-family: "Open Sans", sans-serif;
         font-weight: 400;
         line-height: 27px;
-    }
+      }
 
-    .footer__contact-row img {
-        width: 32px;
-        height: 32px;
-        flex-shrink: 0;
-    }
+      .footer__contact-row img { width: 32px; height: 32px; flex-shrink: 0; }
 
-    .footer__row-phone { left: 1237px; top: 82px; }
-    .footer__row-email { left: 1237px; top: 133px; }
-    .footer__row-address { left: 1237px; top: 190px; flex-direction: column; align-items: flex-start; gap: 6px; }
-    .footer__row-orders { left: 1237px; top: 287px; }
+      .footer__row-phone   { left: 1237px; top: 82px; }
+      .footer__row-email   { left: 1237px; top: 133px; }
+      .footer__row-address { left: 1237px; top: 190px; flex-direction: column; align-items: flex-start; gap: 6px; }
+      .footer__row-orders  { left: 1237px; top: 287px; }
 
-    .footer__address-header {
+      .footer__address-header {
         font-size: 25px;
-        font-family: 'Open Sans', sans-serif;
-        color: #DFDFDF;
-    }
+        font-family: "Open Sans", sans-serif;
+        color: #dfdfdf;
+      }
 
-    /* ═══════════════════════════════
-       MOBILE / TABLET
-    ═══════════════════════════════ */
-    @media (max-width: 768px) {
-        .root {
-            width: 100%;
-        }
+      /* ═══════════════════════════════════════════════════
+         RESPONSIVE MEDIA QUERIES  (mirrors FILE #1 logic)
+      ═══════════════════════════════════════════════════ */
 
-        body {
-            width: 100%;
-        }
-
-        /* Header */
+      /* ── 1600px: Large laptops ── */
+      @media (max-width: 1600px) {
         .site-header {
-            height: auto;
-            padding: 16px 20px;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: space-between;
+          width: clamp(900px, 80%, 1200px);
         }
-
-        .logo-accent {
-            margin-right: 0;
-        }
-
-        /* Show burger, hide default nav */
-        .burger-menu {
-            display: flex;
-        }
-
         .site-nav {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            max-width: 320px;
-            height: 100vh;
-            background: #332150;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            padding: 80px 30px 30px;
-            gap: 30px;
-            margin-right: 0;
-            z-index: 1000;
-            transition: right 0.35s ease;
-            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.35);
+          gap: 44px;
+        }
+        .site-nav a,
+        .site-nav > span {
+          font-size: 20px;
+          letter-spacing: 2px;
         }
 
-        .site-nav.active {
-            right: 0;
+        .hero-section-blog {
+          height: clamp(500px, 49vw, 787px);
+          margin-top: clamp(60px, 7.5vw, 120px);
         }
 
-        .site-nav span {
-            font-size: 20px;
+        .decks-section,
+        .popular-section {
+          padding: 0 clamp(16px, 2vw, 40px);
+          margin-top: clamp(60px, 6.25vw, 100px);
         }
 
-        .nav-close {
-            display: block;
+        .decks-grid,
+        .popular-grid {
+          grid-template-columns: repeat(4, minmax(0, clamp(240px, 19vw, 311px)));
+          gap: clamp(14px, 1.3vw, 20px);
         }
 
-        .header-icons {
-            gap: 16px;
+        .deck-card,
+        .popular-card {
+          height: auto;
+          min-height: 420px;
         }
 
-        /* Hero */
-        .hero-section {
-            height: auto;
-            min-height: 400px;
-            margin-top: 0;
+        .deck-card__image,
+        .popular-card__image {
+          height: clamp(200px, 17vw, 273px);
         }
 
-        .hero-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: clamp(18px, 1.56vw, 25px);
+          line-height: 1.4;
         }
 
-        .hero-content {
-            position: relative;
-            left: auto;
-            bottom: auto;
-            padding: 30px 20px;
-            align-items: flex-start;
+        .decks-title,
+        .popular-title {
+          font-size: clamp(44px, 4vw, 64px);
+          letter-spacing: clamp(5px, 0.5vw, 8px);
         }
 
-        .brand-title { font-size: 40px; letter-spacing: 3px; }
-        .hero-subtitle {
-           width: 350px; 
-           font-size: 16px;
-           text-align: left;
-           }
-
-        .frame-white, .frame-orange-1, .frame-orange-2 { display: none; }
-
-        /* History */
-        .history-section {
-            padding: 40px 0;
-            min-height: auto;
+        .load-more-btn {
+          font-size: clamp(18px, 1.56vw, 25px);
+          height: clamp(64px, 5.25vw, 84px);
+          margin-top: clamp(60px, 6.25vw, 100px);
         }
 
-        .section-history {
-            font-size: 36px;
-            padding-left: 0;
-            text-align: center;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
+        .telegram-text {
+          font-size: clamp(18px, 1.7vw, 27px);
+        }
+      }
+
+      /* ── 1440px: Common laptop ── */
+      @media (max-width: 1440px) {
+        .site-header {
+          width: clamp(860px, 78%, 1100px);
+        }
+        .site-nav {
+          gap: 36px;
+        }
+        .site-nav a,
+        .site-nav > span {
+          font-size: 19px;
+          letter-spacing: 1.8px;
         }
 
-        .history-layout {
-            padding: 0 20px;
-            gap: 20px;
+        .hero-section-blog {
+          height: clamp(440px, 46vw, 700px);
+          margin-top: clamp(50px, 6vw, 100px);
         }
 
-        .history-left,
-        .history-right {
-            flex-direction: column;
-            gap: 16px;
+        .decks-grid,
+        .popular-grid {
+          grid-template-columns: repeat(4, minmax(0, clamp(210px, 17vw, 280px)));
         }
 
-        .history-img-3 { width: 100%; height: auto; }
-        .history-img-1 { width: 100%; height: auto; }
-        .history-text { width: 100%; font-size: 16px; }
-        .history-founding { font-size: 16px; padding-top: 0; }
 
-        .deco-rot-1, .deco-rot-3 { display: none; }
-
-        /* Team */
-        .team-section { padding: 30px 0; }
-
-        .section-team {
-            font-size: 36px;
-            padding-left: 20px;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
+  .bg-wrapper {
+          display: none;
         }
 
-        .team-member {
-            flex-direction: column;
-            padding: 0 20px;
-            gap: 16px;
-            margin-bottom: 40px;
+      }
+
+      /* ── 1366px: Common laptop ── */
+      @media (max-width: 1366px) {
+        .site-header {
+          width: clamp(820px, 76%, 1040px);
+        }
+        .site-nav {
+          gap: 28px;
+        }
+        .site-nav a,
+        .site-nav > span {
+          font-size: 17px;
+          letter-spacing: 1.5px;
         }
 
-        .team-member--kirill { flex-direction: column-reverse; }
-
-        .team-mark-img,
-        .team-kirill-img,
-        .team-david-img {
-            width: 100%;
-            height: auto;
+        .hero-section-blog {
+          height: clamp(400px, 43vw, 640px);
+          margin-top: clamp(40px, 5vw, 90px);
         }
 
-        .team-mark-desc,
-        .team-kirill-desc,
-        .team-david-desc {
-            width: 100%;
-            font-size: 16px;
-            text-align: left;
+        .decks-grid,
+        .popular-grid {
+          grid-template-columns: repeat(4, minmax(0, clamp(190px, 16vw, 260px)));
         }
 
-        .team-member__name { font-size: 24px; }
-        .deco-rot-2, .deco-rot-4 { display: none; }
-
-        /* Advantages */
-        .advantages-section { padding: 30px 0; }
-
-        .section-advantages {
-            font-size: 36px;
-            padding-left: 20px;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
+        .decks-title,
+        .popular-title {
+          font-size: clamp(36px, 3.5vw, 54px);
+          letter-spacing: 5px;
         }
 
-        .advantages-row {
-            flex-direction: column;
-            padding-left: 20px;
-            padding-right: 20px;
-            gap: 30px;
-            align-items: center;
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: clamp(16px, 1.4vw, 22px);
         }
 
-        .advantage-card { width: 100%; max-width: 400px; }
-        .adv-num { font-size: 60px; }
-
-        .advantage-card__text,
-        .advantage-card__text--3 {
-            position: static;
-            width: 100%;
-            padding: 20px;
-            font-size: 16px;
+        .load-more-btn {
+          font-size: clamp(16px, 1.4vw, 22px);
         }
 
-        .advantage-card__text--flex { font-size: 16px; }
-        .mission-text { width: 90%; font-size: 16px; }
+        .telegram-text {
+          font-size: clamp(16px, 1.4vw, 22px);
+        }
+      }
 
-        /* Telegram */
-        .telegram-section { padding: 40px 20px; }
-        .telegram-text { width: 100%; font-size: 16px; }
-        .deco-orange, .deco-purple { display: none; }
+      /* ── 1280px: Compact laptops ── */
+      @media (max-width: 1280px) {
+        .site-header {
+          width: clamp(780px, 82%, 1050px);
+        }
+        .site-nav {
+          gap: 22px;
+        }
+        .site-nav a,
+        .site-nav > span {
+          font-size: 16px;
+          letter-spacing: 1.2px;
+        }
+        .icon-monitor {
+          width: 36px;
+          height: 36px;
+        }
+        .icon-user {
+          width: 30px;
+          height: 31px;
+        }
 
-        /* Footer */
+        .hero-section-blog {
+          height: clamp(360px, 40vw, 580px);
+          margin-top: clamp(30px, 4vw, 80px);
+        }
+        .hero-photo-left,
+        .hero-photo-right {
+          max-height: clamp(280px, 35vw, 500px);
+          object-fit: contain;
+        }
+        .hero-title {
+          font-size: clamp(28px, 2.5vw, 40px);
+        }
+
+        .decks-grid,
+        .popular-grid {
+          grid-template-columns: repeat(4, minmax(0, clamp(170px, 15vw, 240px)));
+          gap: clamp(12px, 1vw, 16px);
+        }
+
+        .deck-card__image,
+        .popular-card__image {
+          height: clamp(160px, 14vw, 220px);
+        }
+
+        .decks-title,
+        .popular-title {
+          font-size: clamp(32px, 3.2vw, 48px);
+          letter-spacing: 5px;
+        }
+
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: clamp(14px, 1.25vw, 20px);
+        }
+
+        .deck-card__btn,
+        .popular-card__btn {
+          width: clamp(42px, 4vw, 56px);
+          height: clamp(38px, 3.6vw, 51px);
+        }
+
+        .deck-card__btn img,
+        .popular-card__btn img {
+          width: clamp(24px, 2.5vw, 36px);
+          height: clamp(24px, 2.5vw, 36px);
+        }
+
+        .load-more-btn {
+          font-size: clamp(14px, 1.25vw, 20px);
+          height: clamp(56px, 5vw, 76px);
+          margin-top: clamp(50px, 5vw, 80px);
+        }
+
+        .telegram-text {
+          font-size: clamp(14px, 1.25vw, 20px);
+          width: clamp(420px, 55vw, 700px);
+        }
+
+        .btn-blog {
+          width: 170px;
+          height: 54px;
+        }
+        .btn-blog__text {
+          font-size: 18px;
+        }
+      }
+
+      /* ── 1200px: Transition zone ── */
+      @media (max-width: 1200px) {
+        .site-header {
+          width: 100%;
+          padding: 0 clamp(24px, 3vw, 40px);
+        }
+        .site-nav {
+          gap: 18px;
+        }
+        .site-nav a,
+        .site-nav > span {
+          font-size: 15px;
+          letter-spacing: 1px;
+        }
+
+        .hero-section-blog {
+          height: clamp(300px, 36vw, 520px);
+          margin-top: clamp(24px, 3vw, 60px);
+        }
+
+        .navbar {
+          padding: 0 clamp(20px, 3vw, 40px);
+        }
+
+        .decks-section,
+        .popular-section {
+          padding: 0 clamp(20px, 3vw, 40px);
+          margin-top: clamp(50px, 5vw, 80px);
+        }
+
+        .decks-grid,
+        .popular-grid {
+          grid-template-columns: repeat(4, minmax(0, clamp(150px, 14vw, 220px)));
+          gap: 12px;
+        }
+
+        .deck-card__image,
+        .popular-card__image {
+          height: clamp(140px, 13vw, 200px);
+        }
+
+        .decks-title,
+        .popular-title {
+          font-size: clamp(28px, 2.8vw, 40px);
+          letter-spacing: 4px;
+        }
+
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: clamp(13px, 1.1vw, 18px);
+          line-height: 1.4;
+        }
+
+        .deck-card__btn,
+        .popular-card__btn {
+          width: 38px;
+          height: 35px;
+        }
+        .deck-card__btn img,
+        .popular-card__btn img {
+          width: 22px;
+          height: 22px;
+        }
+
+        .telegram-text {
+          font-size: clamp(13px, 1.1vw, 18px);
+          width: clamp(360px, 50vw, 600px);
+        }
+
+        /* footer becomes grid at 1200 — mirrors FILE #1 */
         .footer {
-            width: 100%;
-            height: auto;
-            padding: 30px 20px;
+          height: auto;
+          font-size: 16px;
+          padding: 30px clamp(20px, 3vw, 40px);
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 8px 20px;
         }
-
         .footer__info-header,
         .footer__delivery,
         .footer__payment,
@@ -924,168 +952,973 @@ color: #FFFFFF;
         .footer__new,
         .footer__contacts-title,
         .footer__contact-row {
-            position: static;
-            width: auto;
+          position: static;
+          width: auto;
+        }
+        .footer__contacts-title {
+          grid-column: 4;
+          grid-row: 1;
+          font-size: 16px;
+        }
+        .footer__row-phone  { grid-column: 4; grid-row: 2; }
+        .footer__row-email  { grid-column: 4; grid-row: 3; }
+        .footer__row-address{ grid-column: 4; grid-row: 4; }
+        .footer__row-orders { grid-column: 4; grid-row: 5; }
+        .footer__contact-row { font-size: 14px; }
+        .footer__contact-row img { width: 20px; height: 20px; }
+        .footer__info-header,
+        .footer__support-header,
+        .footer__extra-header { font-weight: 700; font-size: 15px; }
+        .footer__delivery,
+        .footer__payment,
+        .footer__agreement,
+        .footer__privacy,
+        .footer__cabinet,
+        .footer__bookmarks,
+        .footer__sitemap,
+        .footer__promo,
+        .footer__new { font-size: 14px; }
+      }
+
+      /* ── 1024px: iPad Pro landscape / small laptop ── */
+      @media (max-width: 1024px) {
+        .site-header {
+          width: 100%;
+          padding: 0 clamp(16px, 2.5vw, 30px);
+          height: 80px;
+        }
+        .site-nav {
+          gap: clamp(12px, 2vw, 24px);
+        }
+        .site-nav a,
+        .site-nav > span {
+          font-size: clamp(13px, 1.3vw, 17px);
+          letter-spacing: 1px;
+        }
+        .icon-monitor {
+          width: 34px;
+          height: 34px;
+        }
+        .icon-user {
+          width: 28px;
+          height: 29px;
+        }
+
+        .navbar {
+          padding: 0 clamp(16px, 2.5vw, 30px);
+          height: auto;
+          min-height: 48.7px;
+        }
+        .navbar__location {
+          font-size: clamp(13px, 1.4vw, 18px);
+        }
+        .navbar__search {
+          width: clamp(180px, 30vw, 380px);
+          height: 44px;
+        }
+        .navbar__search-text {
+          font-size: clamp(13px, 1.3vw, 18px);
+        }
+        .navbar__burger-bg {
+          width: 44px;
+          height: 44px;
+        }
+
+        .hero-section-blog {
+          height: clamp(260px, 32vw, 460px);
+          margin-top: 20px;
+        }
+        .hero-photo-left,
+        .hero-photo-right {
+          max-height: clamp(220px, 28vw, 380px);
+          object-fit: contain;
+        }
+        .hero-title {
+          font-size: clamp(22px, 2.5vw, 34px);
+        }
+        .btn-cta {
+          width: 170px;
+          height: 54px;
+        }
+        .btn-cta__text {
+          font-size: 18px;
+        }
+
+        .decks-section,
+        .popular-section {
+          margin-top: clamp(40px, 5vw, 70px);
+          padding: 0 clamp(16px, 2.5vw, 30px);
+        }
+
+        .decks-grid,
+        .popular-grid {
+          grid-template-columns: repeat(2, minmax(0, 311px));
+          gap: 20px;
+        }
+
+        .deck-card,
+        .popular-card {
+          max-width: 100%;
+          height: auto;
+          min-height: 380px;
+        }
+
+        .deck-card__image,
+        .popular-card__image {
+          height: clamp(160px, 22vw, 260px);
+        }
+
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: clamp(14px, 1.4vw, 20px);
+          line-height: 1.5;
+        }
+
+        .decks-title,
+        .popular-title {
+          font-size: clamp(28px, 3.5vw, 46px);
+          letter-spacing: 4px;
+        }
+
+        .load-more-btn {
+          font-size: clamp(14px, 1.4vw, 20px);
+          height: 72px;
+          margin-top: clamp(40px, 4.5vw, 70px);
+        }
+
+        .telegram-section {
+          padding: 40px clamp(16px, 2.5vw, 30px) 60px;
+        }
+        .telegram-text {
+          width: 100%;
+          max-width: 700px;
+          font-size: clamp(13px, 1.4vw, 18px);
+          line-height: 1.6;
+        }
+        .deco-orange,
+        .deco-purple {
+          display: none;
+        }
+
+        .bg-wrapper {
+          display: none;
+        }
+
+        /* footer 3-col at 1024 — mirrors FILE #1 */
+        .footer {
+          height: auto;
+          font-size: 15px;
+          padding: 28px clamp(16px, 3vw, 36px);
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 6px 24px;
+        }
+        .footer__info-header,
+        .footer__delivery,
+        .footer__payment,
+        .footer__agreement,
+        .footer__privacy,
+        .footer__support-header,
+        .footer__cabinet,
+        .footer__bookmarks,
+        .footer__sitemap,
+        .footer__extra-header,
+        .footer__promo,
+        .footer__new,
+        .footer__contacts-title,
+        .footer__contact-row {
+          position: static;
+          width: auto;
+        }
+        .footer__contacts-title {
+          grid-column: 1 / -1;
+          margin-top: 16px;
+          font-size: 15px;
+        }
+        .footer__contact-row {
+          grid-column: 1 / -1;
+          font-size: 14px;
+        }
+        .footer__contact-row img { width: 20px; height: 20px; }
+        .footer__info-header,
+        .footer__support-header,
+        .footer__extra-header {
+          font-weight: 700;
+          margin-top: 10px;
+          font-size: 15px;
+        }
+        .footer__delivery,
+        .footer__payment,
+        .footer__agreement,
+        .footer__privacy,
+        .footer__cabinet,
+        .footer__bookmarks,
+        .footer__sitemap,
+        .footer__promo,
+        .footer__new { font-size: 13px; }
+      }
+
+      /* ── 820px: iPad Air ── */
+      @media (max-width: 820px) {
+        .site-header {
+          height: auto;
+          padding: 14px 20px;
+        }
+        .burger-menu {
+          display: flex;
+        }
+        .site-nav {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 80%;
+          max-width: 320px;
+          height: 100vh;
+          background: #332150;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          padding: 80px 30px 30px;
+          gap: 30px;
+          margin-right: 0;
+          z-index: 1000;
+          transition: right 0.35s ease;
+          box-shadow: -5px 0 25px rgba(0, 0, 0, 0.35);
+        }
+        .site-nav.active {
+          right: 0;
+        }
+        .site-nav > span {
+          font-size: 20px;
+          letter-spacing: 1.5px;
+        }
+        .nav-close {
+          display: block;
+        }
+        .header-icons {
+          gap: 16px;
+        }
+        .icon-monitor {
+          width: 38px;
+          height: 38px;
+        }
+        .icon-user {
+          width: 32px;
+          height: 33px;
+        }
+
+        .navbar {
+          padding: 0 20px;
+          flex-wrap: wrap;
+          height: auto;
+          gap: 10px;
+          margin: 8px 0;
+        }
+        .navbar__search {
+          width: clamp(180px, 55vw, 360px);
+        }
+
+        .hero-section-blog {
+          height: clamp(220px, 30vw, 380px);
+          margin-top: 16px;
+        }
+        .hero-photo-left,
+        .hero-photo-right {
+          max-height: clamp(180px, 25vw, 300px);
+          object-fit: contain;
+        }
+        .hero-title {
+          font-size: clamp(20px, 2.5vw, 30px);
+        }
+        .btn-cta {
+          width: 150px;
+          height: 50px;
+        }
+        .btn-cta__text {
+          font-size: 17px;
+        }
+
+        .decks-section,
+        .popular-section {
+          margin-top: 40px;
+          padding: 0 20px;
+        }
+
+        .decks-grid,
+        .popular-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .deck-card,
+        .popular-card {
+          max-width: 100%;
+          height: auto;
+          min-height: 0;
+        }
+
+        .deck-card__image,
+        .popular-card__image {
+          height: clamp(140px, 20vw, 200px);
+        }
+
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: 16px;
+          line-height: 22px;
+        }
+
+        .deck-card__btn,
+        .popular-card__btn {
+          width: 44px;
+          height: 40px;
+        }
+        .deck-card__btn img,
+        .popular-card__btn img {
+          width: 26px;
+          height: 26px;
+        }
+
+        .decks-title,
+        .popular-title {
+          font-size: 30px;
+          letter-spacing: 4px;
+        }
+
+        .load-more-btn {
+          font-size: 18px;
+          height: 68px;
+          margin-top: 40px;
+          width: clamp(200px, 60vw, 360px);
+        }
+
+        .telegram-section {
+          padding: 36px 20px 56px;
+        }
+        .telegram-text {
+          font-size: 16px;
+          line-height: 24px;
+          width: 100%;
         }
 
         .footer {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px 30px;
+          grid-template-columns: 1fr 1fr;
+          gap: 6px 20px;
+          padding: 24px 20px;
+        }
+        .footer__contact-row { font-size: 14px; }
+      }
+
+      /* ── 768px: iPad ── */
+      @media (max-width: 768px) {
+        .hero-section-blog {
+          height: auto;
+          min-height: 200px;
+          margin-top: 12px;
+          padding: 30px 20px;
+          flex-direction: column;
+          gap: 20px;
+        }
+        .hero-img-blog {
+          position: absolute;
+        }
+        .hero-photo-left,
+        .hero-photo-right {
+          display: none;
+        }
+        .hero-title {
+          font-size: 26px;
         }
 
-        .footer__contacts-title { grid-column: 1 / -1; margin-top: 16px; }
-        .footer__contact-row { grid-column: 1 / -1; }
+        .navbar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+          padding: 10px 20px;
+          height: auto;
+        }
+        .navbar__right {
+          width: 100%;
+        }
+        .navbar__search {
+          flex: 1;
+          width: auto;
+        }
+
+        .decks-grid,
+        .popular-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .deck-card__image,
+        .popular-card__image {
+          height: 180px;
+        }
+
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: 16px;
+          line-height: 22px;
+        }
+
+        .footer {
+          grid-template-columns: 1fr 1fr;
+          padding: 24px 16px;
+          font-size: 14px;
+        }
+        .footer__contact-row { font-size: 14px; }
         .footer__info-header,
         .footer__support-header,
-        .footer__extra-header { font-weight: 700; margin-top: 12px; }
-    }
+        .footer__extra-header { font-size: 14px; }
+      }
 
-    /* Overlay when menu is open */
-    .nav-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-    }
+      /* ── 480px: Large phones ── */
+      @media (max-width: 480px) {
+        .site-header {
+          padding: 12px 16px;
+        }
+        .logo-accent {
+          width: 65px;
+          height: 28px;
+        }
+        .burger-menu {
+          width: 28px;
+          height: 22px;
+        }
 
-    .nav-overlay.active {
-        display: block;
-    }
-</style>
+        .navbar {
+          padding: 8px 16px;
+        }
+        .navbar__search {
+          width: 100%;
+        }
 
-<div class="root">
+        .hero-section-blog {
+          min-height: 180px;
+          padding: 24px 16px;
+        }
+        .hero-title {
+          font-size: 22px;
+        }
+        .btn-cta {
+          width: 140px;
+          height: 48px;
+        }
+        .btn-cta__text {
+          font-size: 16px;
+        }
 
-    <!-- ══ HEADER ══ -->
-    <header class="site-header">
+        .decks-section,
+        .popular-section {
+          padding: 0 16px;
+          margin-top: 32px;
+        }
+
+        .decks-grid,
+        .popular-grid {
+          grid-template-columns: 1fr;
+          justify-items: center;
+        }
+
+        .deck-card,
+        .popular-card {
+          max-width: 320px;
+          width: 100%;
+        }
+
+        .deck-card__image,
+        .popular-card__image {
+          height: 180px;
+        }
+
+        .decks-title,
+        .popular-title {
+          font-size: 26px;
+          letter-spacing: 2px;
+        }
+
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: 15px;
+          line-height: 22px;
+        }
+
+        .load-more-btn {
+          width: 100%;
+          max-width: 320px;
+          font-size: 16px;
+          height: 60px;
+          margin-top: 32px;
+        }
+
+        .telegram-text {
+          font-size: 15px;
+          line-height: 22px;
+        }
+
+        .footer {
+          grid-template-columns: 1fr;
+          gap: 5px;
+          padding: 20px 16px;
+        }
+        .footer__contact-row { font-size: 14px; }
+      }
+
+      /* ── 430px ── */
+      @media (max-width: 430px) {
+        .site-header {
+          padding: 10px 14px;
+        }
+        .logo-accent {
+          width: 60px;
+          height: 26px;
+        }
+        .decks-section,
+        .popular-section {
+          padding: 0 14px;
+        }
+        .navbar {
+          padding: 8px 14px;
+        }
+        .btn-blog {
+          width: 150px;
+          height: 52px;
+        }
+        .btn-blog__text {
+          font-size: 17px;
+        }
+        .hero-section-blog {
+          padding: 20px 14px;
+        }
+        .footer {
+          padding: 20px 14px;
+        }
+        .footer__contact-row img { width: 22px; height: 22px; }
+        .footer__contact-row,
+        .footer__info-header,
+        .footer__support-header,
+        .footer__extra-header { font-size: 14px; }
+      }
+
+      /* ── 390px ── */
+      @media (max-width: 390px) {
+        .decks-title,
+        .popular-title {
+          font-size: 23px;
+          letter-spacing: 1.5px;
+        }
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: 14px;
+          line-height: 20px;
+        }
+        .hero-title {
+          font-size: 20px;
+        }
+        .telegram-text {
+          font-size: 13px;
+          line-height: 20px;
+        }
+        .load-more-btn {
+          font-size: 14px;
+          height: 54px;
+        }
+      }
+
+      /* ── 375px ── */
+      @media (max-width: 375px) {
+        .logo-accent {
+          width: 54px;
+          height: 24px;
+        }
+        .site-header {
+          padding: 12px 12px;
+        }
+        .site-nav {
+          width: 85%;
+        }
+        .decks-section,
+        .popular-section {
+          padding: 0 12px;
+        }
+        .navbar {
+          padding: 8px 12px;
+        }
+        .hero-section-blog {
+          padding: 18px 12px;
+        }
+        .hero-title {
+          font-size: 19px;
+        }
+        .btn-cta {
+          width: 130px;
+          height: 44px;
+        }
+        .btn-cta__text {
+          font-size: 15px;
+        }
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: 13px;
+          line-height: 20px;
+        }
+        .decks-title,
+        .popular-title {
+          font-size: 22px;
+        }
+        .telegram-text {
+          font-size: 13px;
+          line-height: 20px;
+        }
+      }
+
+      /* ── 360px ── */
+      @media (max-width: 360px) {
+        .logo-accent {
+          width: 50px;
+          height: 22px;
+        }
+        .hero-title {
+          font-size: 18px;
+        }
+        .decks-title,
+        .popular-title {
+          font-size: 21px;
+          letter-spacing: 1.2px;
+        }
+        .load-more-btn {
+          font-size: 13px;
+          height: 50px;
+        }
+        .footer {
+          padding: 18px 12px;
+        }
+        .footer__contact-row,
+        .footer__info-header,
+        .footer__support-header,
+        .footer__extra-header { font-size: 13px; }
+        .footer__contact-row img { width: 20px; height: 20px; }
+      }
+
+      /* ── 320px ── */
+      @media (max-width: 320px) {
+        .logo-accent {
+          width: 46px;
+          height: 20px;
+        }
+        .burger-menu {
+          width: 26px;
+          height: 20px;
+        }
+        .hero-title {
+          font-size: 16px;
+        }
+        .btn-cta {
+          width: 120px;
+          height: 40px;
+        }
+        .btn-cta__text {
+          font-size: 13px;
+        }
+        .btn-blog {
+          width: 120px;
+          height: 44px;
+        }
+        .btn-blog__text {
+          font-size: 14px;
+        }
+        .decks-title,
+        .popular-title {
+          font-size: 19px;
+          letter-spacing: 1px;
+        }
+        .deck-card__name,
+        .popular-card__name,
+        .deck-card__price,
+        .popular-card__price {
+          font-size: 12px;
+          line-height: 18px;
+        }
+        .deck-card__btn,
+        .popular-card__btn {
+          width: 34px;
+          height: 32px;
+        }
+        .deck-card__btn img,
+        .popular-card__btn img {
+          width: 20px;
+          height: 20px;
+        }
+        .decks-section,
+        .popular-section {
+          padding: 0 10px;
+        }
+        .navbar {
+          padding: 6px 10px;
+        }
+        .load-more-btn {
+          font-size: 12px;
+          height: 46px;
+          margin-top: 24px;
+        }
+        .telegram-text {
+          font-size: 12px;
+          line-height: 18px;
+        }
+        .footer {
+          padding: 16px 10px;
+          gap: 4px;
+        }
+        .footer__contact-row,
+        .footer__info-header,
+        .footer__support-header,
+        .footer__extra-header { font-size: 12px; }
+        .footer__contact-row img { width: 18px; height: 18px; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="root">
+
+      <header class="site-header">
         <div class="logo-accent">
-            <img src="logo.png" alt="Boardwave logo">
+          <img src="logo.png" alt="Boardwave logo" />
         </div>
-
-        <!-- Burger Button -->
         <button class="burger-menu" id="burgerBtn" aria-label="Открыть меню">
-            <span></span>
-            <span></span>
-            <span></span>
-            
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
-
-        <!-- Overlay -->
         <div class="nav-overlay" id="navOverlay"></div>
-
         <nav class="site-nav" id="mainNav">
-            <!-- Close Button -->
-            <button class="nav-close" id="navClose" aria-label="Закрыть меню">&times;</button>
-            <span>О нас</span>
-            <span>Каталог</span>
-            <span>Отзывы</span>
-            <span>Контакты</span>
-            <div class="header-icons">
-            <div class="icon-monitor"><img src="shop.png" alt="shop"></div>
-            <div class="icon-user"><img src="user.png" alt="user"></div>
-        </div>
+          <button class="nav-close" id="navClose" aria-label="Закрыть меню">&times;</button>
+          <span>О нас</span>
+          <span>Каталог</span>
+          <span>Отзывы</span>
+          <span>Контакты</span>
+          <div class="header-icons">
+            <div class="icon-monitor"><img src="shop.png" alt="shop" /></div>
+            <div class="icon-user"><img src="user.png" alt="user" /></div>
+          </div>
         </nav>
+      </header>
 
-        
-    </header>
-
-   
-<div style="width: 1301px; height: 48.70px; position: relative; margin: 0 auto ;">
-  <div style="width: 52px; height: 48.70px; left: 1249px; top: 0px; position: absolute">
-    <div style="width: 52px; height: 48.70px; left: 0px; top: 0px; position: absolute; background: #DFDFDF; border-radius: 10px"></div>
-    <div style="width: 20px; height: 20px; left: 16px; top: 14px; position: absolute">
-      <div style="width: 20px; height: 20px; left: 0px; top: 0px; position: absolute"></div>
-    </div>
-  </div>
-  <div style="width: 473px; height: 38.59px; left: 763px; top: 0px; position: absolute">
-    <div style="width: 477px; height: 48.70px; left: -4px; top: 0px; position: absolute; background: #AF80FF; border-radius: 10px"></div>
-    <div style="width: 338px; left: 48px; top: 12px; position: absolute; color: black; font-size: 20px; font-family: Open Sans; font-weight: 400; line-height: 24px; word-wrap: break-word">Поиск...</div>
-    <div style="width: 26px; height: 26px; left: 14px; top: 10px; position: absolute">
-      <div style="width: 26px; height: 26px; left: 0px; top: 0px; position: absolute"></div>
-    </div>
-  </div>
-  <div style="width: 338px; left: 40px; top: 7px; position: absolute; color: #DFDFDF; font-size: 25px; font-family: Open Sans; font-weight: 400; line-height: 24px; word-wrap: break-word">Москва, Россия</div>
-  <div style="width: 30px; height: 21px; left: 233px; top: 10px; position: absolute">
-    <div style="width: 30px; height: 21px; left: 0px; top: 0px; position: absolute"></div>
-    <div style="width: 18.75px; height: 7.88px; left: 5.63px; top: 13.13px; position: absolute; background: #DFDFDF"></div>
-    <div style="width: 18.75px; height: 7.87px; left: 24.38px; top: 7.88px; position: absolute; transform: rotate(-180deg); transform-origin: top left; background: #DFDFDF"></div>
-  </div>
-</div>
-
-<!-- ══ HERO ══ -->
-<section class="hero-section-blog">
-
-    <!-- Фон -->
-    <img class="hero-img-blog" src="hero-blog.png" alt="Hero background">
-
-    <!-- Левая картинка -->
-    <img class="hero-photo-left" src="hero-photo-left.png" alt="">
-
-    <!-- Центральный контент -->
-    <div class="hero-content-blog">
-        <img class="hero-logo" src="hero-logo.png" alt="">
-
-        <h1 class="hero-title">
-            Летний интенсив 
-        </h1>
-
-        <div class="btn-cta">
-            <div class="btn-cta__text">Записаться</div>
+      <div class="navbar">
+        <div class="navbar__location">
+          <img src="icon.png" alt="" />
+          Москва, Россия
+          <img src="options.png" alt="" />
         </div>
-    </div>
+        <div class="navbar__right">
+          <div class="navbar__search">
+            <img src="search.png" alt="" />
+            <span class="navbar__search-text">Поиск...</span>
+          </div>
+          <div class="navbar__burger-bg">
+            <img src="buttons-search.png" alt="" />
+          </div>
+        </div>
+      </div>
 
-    <!-- Правая картинка -->
-    <img class="hero-photo-right" src="hero-photo-right.png" alt="">
+      <section class="hero-section-blog">
+        <img class="hero-img-blog" src="hero-blog.png" alt="Hero background" />
+        <img class="hero-photo-left" src="hero-photo-left.png" alt="" />
+        <div class="hero-content-blog">
+          <img class="hero-logo" src="hero-logo.png" alt="" />
+          <h1 class="hero-title">Летний интенсив</h1>
+          <button class="btn-cta">
+            <span class="btn-cta__text">Записаться</span>
+          </button>
+        </div>
+        <img class="hero-photo-right" src="hero-photo-right.png" alt="" />
+      </section>
 
-</section>
+      <section class="decks-section">
+        <div class="decks-wrapper">
+          <h2 class="decks-title">Деки</h2>
+          <div class="decks-grid">
+            <article class="deck-card">
+              <img class="deck-card__image" src="deck1.png" alt="Дека Rosy blush" />
+              <div class="deck-card__body">
+                <p class="deck-card__name">Дека Rosy blush</p>
+                <span class="deck-card__price">3 300 ₽</span>
+                <div class="deck-card__actions">
+                  <button class="deck-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="deck-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
 
+            <article class="deck-card">
+              <img class="deck-card__image" src="deck2.png" alt="Дека Arctic wave" />
+              <div class="deck-card__body">
+                <p class="deck-card__name">Дека Arctic wave</p>
+                <span class="deck-card__price">3 800 ₽</span>
+                <div class="deck-card__actions">
+                  <button class="deck-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="deck-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
 
+            <article class="deck-card">
+              <img class="deck-card__image" src="deck3.png" alt="Дека Forest green" />
+              <div class="deck-card__body">
+                <p class="deck-card__name">Дека Forest green</p>
+                <span class="deck-card__price">4 100 ₽</span>
+                <div class="deck-card__actions">
+                  <button class="deck-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="deck-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
 
+            <article class="deck-card">
+              <img class="deck-card__image" src="deck4.png" alt="Дека Midnight smoke" />
+              <div class="deck-card__body">
+                <p class="deck-card__name">Дека Midnight smoke</p>
+                <span class="deck-card__price">3 600 ₽</span>
+                <div class="deck-card__actions">
+                  <button class="deck-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="deck-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-<div style="width: 703px; height: 657.55px; position: relative">
-  <div style="width: 106px; left: 6px; top: 480px; position: absolute; text-align: center; color: #DFDFDF; font-size: 25px; font-family: DM Sans; font-weight: 700; line-height: 16px; word-wrap: break-word">3300 ₽  </div>
-  <div style="width: 56px; height: 51.45px; left: 166px; top: 525px; position: absolute; background: #AF80FF; border-radius: 9999px"></div>
-  <div style="width: 56px; height: 51.45px; left: 235px; top: 526px; position: absolute; background: #AF80FF; border-radius: 9999px"></div>
-  <div style="width: 29.75px; height: 27.33px; left: 246.38px; top: 538.06px; position: absolute; overflow: hidden">
-    <div style="width: 4.96px; height: 4.56px; left: 8.68px; top: 21.64px; position: absolute; background: #7A869A"></div>
-    <div style="width: 4.96px; height: 4.56px; left: 22.31px; top: 21.64px; position: absolute; background: #7A869A"></div>
-    <div style="width: 29.75px; height: 19.36px; left: 0px; top: 0px; position: absolute; background: #7A869A"></div>
-  </div>
-  <div style="width: 37px; height: 37px; left: 244px; top: 533px; position: absolute; overflow: hidden">
-    <div style="width: 37px; height: 37px; left: 0px; top: 0px; position: absolute"></div>
-    <div style="width: 30.83px; height: 26.98px; left: 3.08px; top: 5.40px; position: absolute; background: #FCFCFD"></div>
-  </div>
-  <div style="width: 36px; height: 36px; left: 176px; top: 533px; position: absolute; overflow: hidden">
-    <div style="width: 36px; height: 36px; left: 0px; top: 0px; position: absolute"></div>
-    <div style="width: 30.58px; height: 25.50px; left: 3px; top: 4.50px; position: absolute; background: white"></div>
-    <div style="width: 3px; height: 3px; left: 13.50px; top: 30px; position: absolute; background: white"></div>
-    <div style="width: 3px; height: 3px; left: 22.50px; top: 30px; position: absolute; background: white"></div>
-  </div>
-  <div style="width: 282px; left: 15px; top: 431px; position: absolute; color: #DFDFDF; font-size: 25px; font-family: DM Sans; font-weight: 400; line-height: 27px; word-wrap: break-word">Дека Rosy blush</div>
-  <div style="width: 310px; height: 490px; left: 1px; top: 120px; position: absolute; border-radius: 20px; border: 1px #D9D9D9 solid"></div>
-  <div style="width: 310px; height: 272.88px; left: 1px; top: 111px; position: absolute; background: #DEDBD6"></div>
-  <img style="width: 311px; height: 273px; left: 0px; top: 99px; position: absolute" src="https://placehold.co/311x273" />
-  <div style="width: 10.30px; height: 10.55px; left: 600px; top: 647px; position: absolute; background: #E1E5EE"></div>
-  <div style="width: 10.30px; height: 10.55px; left: 623.17px; top: 647px; position: absolute; background: #E1E5EE"></div>
-  <div style="width: 10.30px; height: 10.55px; left: 646.35px; top: 647px; position: absolute; background: #E1E5EE"></div>
-  <div style="width: 10.30px; height: 10.55px; left: 669.53px; top: 647px; position: absolute; background: #E1E5EE"></div>
-  <div style="width: 10.30px; height: 10.55px; left: 692.70px; top: 647px; position: absolute; background: #E1E5EE"></div>
-  <div style="left: 6px; top: 0px; position: absolute; color: #FF582B; font-size: 70px; font-family: DaMiOne; font-weight: 400; letter-spacing: 8.40px; word-wrap: break-word">Деки</div>
-</div>
+      <section class="popular-section">
+        <div class="popular-wrapper">
+          <h2 class="popular-title">Популярные товары</h2>
+          <div class="popular-grid">
+            <article class="popular-card">
+              <img class="popular-card__image" src="product1.png" alt="Набор подшипников" />
+              <div class="popular-card__body">
+                <p class="popular-card__name">Набор сиренево-золотых подшипников</p>
+                <span class="popular-card__price">2 550 ₽</span>
+                <div class="popular-card__actions">
+                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
 
-    <!-- ══ TELEGRAM / BLOG ══ -->
-    <div class="telegram-section">
-        <div class="deco-orange"><img src="deko_orange.png" alt=""></div>
-        <div class="deco-purple"><img src="deko_purple.png" alt=""></div>
-        
-    </div>
+            <article class="popular-card">
+              <img class="popular-card__image" src="product2.png" alt="Скейтборд China Jam" />
+              <div class="popular-card__body">
+                <p class="popular-card__name">Скейтборд China Jam</p>
+                <span class="popular-card__price">7 800 ₽</span>
+                <div class="popular-card__actions">
+                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
 
-    <!-- ══ FOOTER ══ -->
-    <div class="footer">
+            <article class="popular-card">
+              <img class="popular-card__image" src="product3.png" alt="Скейтборд Jart Involution" />
+              <div class="popular-card__body">
+                <p class="popular-card__name">Скейтборд Jart Involution</p>
+                <span class="popular-card__price">10 500 ₽</span>
+                <div class="popular-card__actions">
+                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
+
+            <article class="popular-card">
+              <img class="popular-card__image" src="product4.png" alt="Набор из 4 колёс" />
+              <div class="popular-card__body">
+                <p class="popular-card__name">Набор из 4 колёс</p>
+                <span class="popular-card__price">1 950 ₽</span>
+                <div class="popular-card__actions">
+                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
+
+            <article class="popular-card">
+              <img class="popular-card__image" src="product5.png" alt="Скейтборд Green psychedalics" />
+              <div class="popular-card__body">
+                <p class="popular-card__name">Скейтборд Green psychedalics</p>
+                <span class="popular-card__price">9 500 ₽</span>
+                <div class="popular-card__actions">
+                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
+
+            <article class="popular-card">
+              <img class="popular-card__image" src="product6.png" alt="Дека Memdog" />
+              <div class="popular-card__body">
+                <p class="popular-card__name">Дека Memdog</p>
+                <span class="popular-card__price">4 100 ₽</span>
+                <div class="popular-card__actions">
+                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
+
+            <article class="popular-card">
+              <img class="popular-card__image" src="product7.png" alt="Набор фиолетовых подшипников" />
+              <div class="popular-card__body">
+                <p class="popular-card__name">Набор фиолетовых подшипников</p>
+                <span class="popular-card__price">2 800 ₽</span>
+                <div class="popular-card__actions">
+                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
+
+            <article class="popular-card">
+              <img class="popular-card__image" src="product8.png" alt="Набор для сборки скейтборда" />
+              <div class="popular-card__body">
+                <p class="popular-card__name">Набор для сборки скейтборда</p>
+                <span class="popular-card__price">9 990 ₽</span>
+                <div class="popular-card__actions">
+                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
+                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <button class="load-more-btn">Загрузить ещё 50+</button>
+      </section>
+
+      <div class="bg-wrapper">
+        <img class="bg-img-1" src="skateboard-blog-1.png" alt="" />
+        <img class="bg-img-2" src="skateboard-blog-2.png" alt="" />
+        <img class="bg-img-3" src="skateboard-blog-3.png" alt="" />
+        <img class="bg-img-4" src="skateboard-blog-4.png" alt="" />
+      </div>
+
+      <div class="telegram-section">
+        <div class="deco-orange"><img src="deko_orange.png" alt="" /></div>
+        <div class="deco-purple"><img src="deko_purple.png" alt="" /></div>
+      </div>
+
+      <footer class="footer">
         <div class="footer__info-header">Информация</div>
         <div class="footer__delivery">Доставка</div>
         <div class="footer__payment">Оплата</div>
@@ -1104,77 +1937,66 @@ color: #FFFFFF;
         <div class="footer__contacts-title">Наши контакты:</div>
 
         <div class="footer__contact-row footer__row-phone">
-            <img src="phone.png" alt="Телефон">
-            <span>+7 (964) 828-58-11</span>
+          <img src="phone.png" alt="Телефон" />
+          <span>+7 (964) 828-58-11</span>
         </div>
 
         <div class="footer__contact-row footer__row-email">
-            <img src="mail.png" alt="Email">
-            <span>boardwave@contact.ru</span>
+          <img src="mail.png" alt="Email" />
+          <span>boardwave@contact.ru</span>
         </div>
 
         <div class="footer__contact-row footer__row-address">
-            <span class="footer__address-header">Наш адрес:</span>
-            <div style="display:flex; align-items:center; gap:10px;">
-                <img src="location.png" alt="Адрес">
-                <span>г. Москва, Малый проезд 5</span>
-            </div>
+          <span class="footer__address-header">Наш адрес:</span>
+          <div style="display: flex; align-items: center; gap: 10px">
+            <img src="location.png" alt="Адрес" />
+            <span>г. Москва, Малый проезд 5</span>
+          </div>
         </div>
 
         <div class="footer__contact-row footer__row-orders">
-            <img src="clock.png" alt="Часы">
-            <span>Заказы через корзину 24/7</span>
+          <img src="clock.png" alt="Часы" />
+          <span>Заказы через корзину 24/7</span>
         </div>
+      </footer>
+
     </div>
 
-</div>
-
-<script>
-    (function() {
-        const burgerBtn = document.getElementById('burgerBtn');
-        const mainNav = document.getElementById('mainNav');
-        const navClose = document.getElementById('navClose');
-        const navOverlay = document.getElementById('navOverlay');
-        const navLinks = mainNav.querySelectorAll('span');
-        const body = document.body;
+    <script>
+      (function () {
+        var burgerBtn = document.getElementById("burgerBtn");
+        var mainNav = document.getElementById("mainNav");
+        var navClose = document.getElementById("navClose");
+        var navOverlay = document.getElementById("navOverlay");
+        var navLinks = mainNav.querySelectorAll("span");
+        var body = document.body;
 
         function openMenu() {
-            mainNav.classList.add('active');
-            navOverlay.classList.add('active');
-            body.classList.add('no-scroll');
+          mainNav.classList.add("active");
+          navOverlay.classList.add("active");
+          body.classList.add("no-scroll");
         }
 
         function closeMenu() {
-            mainNav.classList.remove('active');
-            navOverlay.classList.remove('active');
-            body.classList.remove('no-scroll');
+          mainNav.classList.remove("active");
+          navOverlay.classList.remove("active");
+          body.classList.remove("no-scroll");
         }
 
-        if (burgerBtn) {
-            burgerBtn.addEventListener('click', openMenu);
-        }
+        if (burgerBtn) burgerBtn.addEventListener("click", openMenu);
+        if (navClose) navClose.addEventListener("click", closeMenu);
+        if (navOverlay) navOverlay.addEventListener("click", closeMenu);
 
-        if (navClose) {
-            navClose.addEventListener('click', closeMenu);
-        }
-
-        if (navOverlay) {
-            navOverlay.addEventListener('click', closeMenu);
-        }
-
-        // Close menu when any nav link is clicked
-        navLinks.forEach(function(link) {
-            link.addEventListener('click', closeMenu);
+        navLinks.forEach(function (link) {
+          link.addEventListener("click", closeMenu);
         });
 
-        // Close menu on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-                closeMenu();
-            }
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && mainNav.classList.contains("active")) {
+            closeMenu();
+          }
         });
-    })();
-</script>
-
-</body>
+      })();
+    </script>
+  </body>
 </html>
