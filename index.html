@@ -897,7 +897,7 @@
           width: 100%;
           height: auto;
           padding: 28px 20px;
-          font-size: clamp(18px, 1.7vw, 27px);
+          font-size: 20px;
         }
         .advantage-card__text--flex {
           font-size: clamp(18px, 1.7vw, 27px);
@@ -1030,6 +1030,7 @@
         .section-advantages {
           text-align: center;
           align-items: center;
+
         }
         .advantages-row {
           padding-left: clamp(60px, 13vw, 190px);
@@ -2391,6 +2392,96 @@
           height: 14px;
         }
       }
+
+
+      
+      /* ═══ HOVER SYSTEM ═══ */
+
+      /* Shared transition for all interactive elements */
+      .deck-card__btn,
+      .popular-card__btn,
+      .btn-cta,
+      .btn-blog,
+      .btn-blog__text,
+      .load-more-btn,
+      .navbar__search,
+      .site-nav a,
+      .site-nav > span,
+      .footer__list li {
+        transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      /* 1. CIRCLE BACKGROUND ICONS — background becomes orange */
+      .deck-card__btn:hover,
+      .popular-card__btn:hover {
+        background: #FF4C00;
+      }
+
+      /* Tooltip reveal */
+      .deck-card__btn[data-tooltip]:hover::after,
+      .popular-card__btn[data-tooltip]:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+
+      /* 2. GHOST BUTTON (.btn-blog) — text and outline turn orange */
+.btn-blog {
+    transition: outline-color 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-blog:hover {
+    outline-color: #FF4C00;
+}
+
+.btn-blog:hover .btn-blog__text {
+    color: #FF4C00;
+}
+
+      /* 3. OUTLINE BUTTON (.load-more-btn) — accent becomes purple */
+      .load-more-btn:hover {
+        border-color: #8B7FD4;
+        color: #8B7FD4;
+      }
+
+      /* 4. SEARCH FIELD — background becomes purple */
+      .navbar__search:hover {
+        background: #8B7FD4;
+      }
+
+      /* 5. NAVIGATION LINKS — text becomes orange */
+      .site-nav a:hover,
+      .site-nav > span:hover {
+        color: #FF4C00;
+      }
+
+      /* Footer list links — text becomes orange */
+      .footer__list li:hover {
+        color: #FF4C00;
+      }
+
+      /* 6. CTA / TABLET BUTTON (.btn-cta) — darken + subtle orange glow */
+      .btn-cta:hover {
+    background: #E64400;
+    box-shadow: 
+        0 0 20px rgba(255, 76, 0, 0.7),
+        0 0 40px rgba(255, 76, 0, 0.5),
+        0 0 60px rgba(255, 76, 0, 0.3);
+     
+}
+
+
+              /* Иконки хедера — при наведении становятся оранжевыми */
+.icon-monitor,
+.icon-user {
+    transition: filter 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.icon-monitor:hover,
+.icon-user:hover {
+    filter: brightness(0) saturate(100%) invert(45%) sepia(85%) saturate(2500%) hue-rotate(347deg) brightness(101%) contrast(101%);
+}
+
+
     </style>
 
     <div class="root">

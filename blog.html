@@ -226,7 +226,7 @@
         position: relative;
         width: 100%;
         height: 787px;
-        margin-top: 120px;
+        margin-top: 40px;
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -241,6 +241,7 @@
         object-fit: cover;
         box-shadow: 0px 44px 100px 25px rgba(0, 0, 0, 0.25);
         z-index: 1;
+        top: 60px;
       }
 
       .hero-photo-left,
@@ -274,13 +275,13 @@
         padding: 16px 24px;
         background: #ff582b;
         border-radius: 90px;
-        outline: 1px #353945 solid;
         outline-offset: -1px;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
         border: none;
+        transition: all 0.3s ease;
       }
       .btn-cta__text {
         color: black;
@@ -332,12 +333,6 @@
         font-family: "DM Sans", sans-serif;
         font-weight: 700;
         line-height: 16px;
-        transition:
-          background 0.2s,
-          color 0.2s;
-      }
-      .load-more-btn:hover {
-        background: rgba(255, 255, 255, 0.08);
       }
 
       /* ═══ DECKS / POPULAR SECTIONS ═══ */
@@ -390,16 +385,7 @@
         display: flex;
         flex-direction: column;
         background: #6b3fa0;
-        transition:
-          transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
-          box-shadow 0.22s ease;
         cursor: pointer;
-      }
-
-      .deck-card:hover,
-      .popular-card:hover {
-        transform: translateY(-8px) scale(1.025);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
       }
 
       .deck-card__image,
@@ -411,12 +397,6 @@
         flex-shrink: 0;
         border-radius: 18px 18px 0 0;
         background-color: white;
-        transition: transform 0.3s ease;
-      }
-
-      .deck-card:hover .deck-card__image,
-      .popular-card:hover .popular-card__image {
-        transform: scale(1.04);
       }
 
       .deck-card__body,
@@ -466,20 +446,7 @@
         cursor: pointer;
         border: none;
         flex-shrink: 0;
-        transition:
-          background 0.18s,
-          transform 0.15s;
         position: relative;
-      }
-
-      .deck-card__btn:hover,
-      .popular-card__btn:hover {
-        background: #c89fff;
-        transform: scale(1.1);
-      }
-      .deck-card__btn:active,
-      .popular-card__btn:active {
-        transform: scale(0.95);
       }
 
       .deck-card__btn img,
@@ -507,13 +474,8 @@
         opacity: 0;
         pointer-events: none;
         transition:
-          opacity 0.15s,
-          transform 0.15s;
-      }
-      .deck-card__btn[data-tooltip]:hover::after,
-      .popular-card__btn[data-tooltip]:hover::after {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
+          opacity 0.25s cubic-bezier(0.19, 1, 0.22, 1),
+          transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
       }
 
       /* Уведомление корзины */
@@ -574,7 +536,7 @@
         bottom: -5px;
       }
 
-      /* ═══ FOOTER (from file 1) ═══ */
+      /* ═══ FOOTER ═══ */
       .footer {
         width: 100%;
         background: linear-gradient(90deg, #fc562d 0%, #5a3a91 100%);
@@ -632,9 +594,6 @@
         color: #dfdfdf;
         line-height: 1.5;
         cursor: pointer;
-      }
-      .footer__list li:hover {
-        text-decoration: underline;
       }
 
       .footer__contacts-list {
@@ -778,21 +737,6 @@
         .footer__address-label {
           font-size: 16px;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       }
 
       @media (max-width: 1440px) {
@@ -809,7 +753,7 @@
         }
         .hero-section-blog {
           height: clamp(440px, 46vw, 700px);
-          margin-top: clamp(50px, 6vw, 100px);
+          margin-top: 10px;
         }
         .decks-grid,
         .popular-grid {
@@ -817,9 +761,6 @@
             4,
             minmax(0, clamp(210px, 17vw, 280px))
           );
-        }
-        .bg-wrapper {
-          display: none;
         }
         .footer__inner {
           gap: 28px 36px;
@@ -833,28 +774,45 @@
           font-size: 15px;
         }
 
+        .hero-logo {
+          width: 400px;
+        }
+        .hero-photo-left {
+          width: 490px;
+        }
+        .hero-photo-right {
+          width: 490px;
+        }
+        .hero-title {
+          font-size: 35px;
+        }
 
-
-
-.hero-logo {
-width: 400px;
-}
-
- .hero-photo-left  {
-width: 490px;
-}
- 
-     
- .hero-photo-right  {
-width: 490px;
-}
-
-.hero-title {
-font-size: 35px;
-}
-
-
-        
+        .bg-wrapper {
+          position: relative;
+        }
+        .bg-img-1 {
+          position: absolute;
+          top: -1800px;
+          width: 150px;
+        }
+        .bg-img-2 {
+          position: absolute;
+          right: 0;
+          top: -1800px;
+          width: 200px;
+        }
+        .bg-img-3 {
+          position: absolute;
+          top: -1150px;
+          left: -20px;
+          width: 300px;
+        }
+        .bg-img-4 {
+          position: absolute;
+          right: 0;
+          top: -1000px;
+          width: 350px;
+        }
       }
 
       @media (max-width: 1366px) {
@@ -871,7 +829,7 @@ font-size: 35px;
         }
         .hero-section-blog {
           height: clamp(400px, 43vw, 640px);
-          margin-top: clamp(40px, 5vw, 90px);
+          margin-top: 10px;
         }
         .decks-grid,
         .popular-grid {
@@ -1061,30 +1019,18 @@ font-size: 35px;
           height: 20px;
         }
 
-
-
-
-.hero-logo {
-width: 290px;
-}
-
- .hero-photo-left  {
-width: 450px;
-}
- 
-     
- .hero-photo-right  {
-width: 450px;
-}
-
-.hero-title {
-font-size: 35px;
-}
-
-
-
-
-
+        .hero-logo {
+          width: 290px;
+        }
+        .hero-photo-left {
+          width: 450px;
+        }
+        .hero-photo-right {
+          width: 450px;
+        }
+        .hero-title {
+          font-size: 35px;
+        }
       }
 
       @media (max-width: 1024px) {
@@ -1390,11 +1336,9 @@ font-size: 35px;
           align-items: flex-start;
         }
 
-
-
         .hero-logo {
           margin-top: 10px;
-        width: 200px;
+          width: 200px;
         }
       }
 
@@ -1810,6 +1754,97 @@ font-size: 35px;
           height: 14px;
         }
       }
+
+      /* ═══ HOVER SYSTEM ═══ */
+
+      /* Shared transition for all interactive elements */
+      .deck-card__btn,
+      .popular-card__btn,
+      .btn-cta,
+      .btn-blog,
+      .btn-blog__text,
+      .load-more-btn,
+      .navbar__search,
+      .site-nav a,
+      .site-nav > span,
+      .footer__list li {
+        transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      /* 1. CIRCLE BACKGROUND ICONS — background becomes orange */
+      .deck-card__btn:hover,
+      .popular-card__btn:hover {
+        background: #FF4C00;
+      }
+
+      /* Tooltip reveal */
+      .deck-card__btn[data-tooltip]:hover::after,
+      .popular-card__btn[data-tooltip]:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+
+      /* 2. GHOST BUTTON (.btn-blog) — text and outline turn orange */
+.btn-blog {
+    transition: outline-color 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-blog:hover {
+    outline-color: #FF4C00;
+}
+
+.btn-blog:hover .btn-blog__text {
+    color: #FF4C00;
+}
+
+      /* 3. OUTLINE BUTTON (.load-more-btn) — accent becomes purple */
+      .load-more-btn:hover {
+        border-color: #8B7FD4;
+        color: #8B7FD4;
+      }
+
+      /* 4. SEARCH FIELD — background becomes purple */
+      .navbar__search:hover {
+        background: #8B7FD4;
+      }
+
+      /* 5. NAVIGATION LINKS — text becomes orange */
+      .site-nav a:hover,
+      .site-nav > span:hover {
+        color: #FF4C00;
+      }
+
+      /* Footer list links — text becomes orange */
+      .footer__list li:hover {
+        color: #FF4C00;
+      }
+
+      /* 6. CTA / TABLET BUTTON (.btn-cta) — darken + subtle orange glow */
+      .btn-cta:hover {
+    background: #E64400;
+    box-shadow: 
+        0 0 20px rgba(255, 76, 0, 0.7),
+        0 0 40px rgba(255, 76, 0, 0.5),
+        0 0 60px rgba(255, 76, 0, 0.3);
+     
+}
+
+
+    
+              /* Иконки хедера — при наведении становятся оранжевыми */
+.icon-monitor,
+.icon-user {
+    transition: filter 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.icon-monitor:hover,
+.icon-user:hover {
+    filter: brightness(0) saturate(100%) invert(45%) sepia(85%) saturate(2500%) hue-rotate(347deg) brightness(101%) contrast(101%);
+}
+
+
+      /* 7. "Записаться" uses .btn-cta — same rule applies above */
+
     </style>
   </head>
 
@@ -1832,8 +1867,13 @@ font-size: 35px;
           <span>Отзывы</span>
           <span>Контакты</span>
           <div class="header-icons">
-            <div class="icon-monitor"><img src="shop.png" alt="shop" /></div>
-            <div class="icon-user"><img src="user.png" alt="user" /></div>
+
+            <div class="icon-monitor">
+              <img src="shop.png" alt="shop" />
+            </div>
+            <div class="icon-user">
+              <img src="user.png" alt="user" />
+            </div>
           </div>
         </nav>
       </header>
@@ -1907,8 +1947,8 @@ font-size: 35px;
                 alt="Дека Arctic wave"
               />
               <div class="deck-card__body">
-                <p class="deck-card__name">Дека Arctic wave</p>
-                <span class="deck-card__price">3 800 ₽</span>
+                <p class="deck-card__name">Дека Prisoner</p>
+                <span class="deck-card__price">4500 ₽</span>
                 <div class="deck-card__actions">
                   <button
                     class="deck-card__btn"
@@ -1935,8 +1975,8 @@ font-size: 35px;
                 alt="Дека Forest green"
               />
               <div class="deck-card__body">
-                <p class="deck-card__name">Дека Forest green</p>
-                <span class="deck-card__price">4 100 ₽</span>
+                <p class="deck-card__name">Дека Skeleton</p>
+                <span class="deck-card__price">3000 ₽</span>
                 <div class="deck-card__actions">
                   <button
                     class="deck-card__btn"
@@ -1963,8 +2003,8 @@ font-size: 35px;
                 alt="Дека Midnight smoke"
               />
               <div class="deck-card__body">
-                <p class="deck-card__name">Дека Midnight smoke</p>
-                <span class="deck-card__price">3 600 ₽</span>
+                <p class="deck-card__name">Дека Psychedalics</p>
+                <span class="deck-card__price">5800 ₽</span>
                 <div class="deck-card__actions">
                   <button
                     class="deck-card__btn"
@@ -2242,7 +2282,6 @@ font-size: 35px;
         </button>
       </div>
 
-      <!-- FOOTER из файла 1 -->
       <footer class="footer">
         <div class="footer__inner">
           <div class="footer__col">
@@ -2300,7 +2339,6 @@ font-size: 35px;
       </footer>
     </div>
 
-    <!-- Toast уведомление -->
     <div class="cart-toast" id="cartToast"></div>
 
     <script>
