@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boardwave</title>
+    <title>Boardwave — Каталог</title>
     <style>
       @font-face {
         font-family: "DaMiOne-Regular";
@@ -20,7 +20,6 @@
         margin: 0;
         padding: 0;
       }
-
       html,
       body {
         max-width: 100%;
@@ -46,9 +45,7 @@
         overflow: hidden;
       }
 
-      /* ═══════════════════════════════
-         HEADER
-      ═══════════════════════════════ */
+      /* ═══ HEADER ═══ */
       .site-header {
         width: 1200px;
         margin: 0 auto;
@@ -64,7 +61,6 @@
       .logo-accent {
         width: 77px;
         height: 34px;
-        flex-shrink: 0;
       }
 
       .logo-accent img {
@@ -76,9 +72,7 @@
       .site-nav {
         display: flex;
         align-items: center;
-        gap: clamp(20px, 3vw, 60px);
-        flex: 1;
-        justify-content: center;
+        gap: 60px;
       }
 
       .site-nav a,
@@ -100,19 +94,16 @@
         gap: 29px;
         flex-shrink: 0;
       }
-
       .icon-monitor {
         width: 45px;
         height: 45px;
         overflow: hidden;
       }
-
       .icon-user {
         width: 38px;
         height: 39px;
         overflow: hidden;
       }
-
       .icon-monitor img,
       .icon-user img {
         width: 100%;
@@ -133,7 +124,6 @@
         z-index: 10;
         flex-shrink: 0;
       }
-
       .burger-menu span {
         display: block;
         width: 100%;
@@ -167,14 +157,11 @@
         background: rgba(0, 0, 0, 0.5);
         z-index: 999;
       }
-
       .nav-overlay.active {
         display: block;
       }
 
-      /* ═══════════════════════════════
-         NAVBAR (search bar)
-      ═══════════════════════════════ */
+      /* ═══ NAVBAR ═══ */
       .navbar {
         width: 100%;
         max-width: 1301px;
@@ -234,9 +221,7 @@
         flex-shrink: 0;
       }
 
-      /* ═══════════════════════════════
-         HERO
-      ═══════════════════════════════ */
+      /* ═══ HERO ═══ */
       .hero-section-blog {
         position: relative;
         width: 100%;
@@ -297,7 +282,6 @@
         cursor: pointer;
         border: none;
       }
-
       .btn-cta__text {
         color: black;
         font-size: 23px;
@@ -321,7 +305,6 @@
         background: transparent;
         border: none;
       }
-
       .btn-blog__text {
         text-align: center;
         color: #fcfcfd;
@@ -349,12 +332,17 @@
         font-family: "DM Sans", sans-serif;
         font-weight: 700;
         line-height: 16px;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .load-more-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
       }
 
-      /* ═══════════════════════════════
-         DECKS SECTION
-      ═══════════════════════════════ */
-      .decks-section {
+      /* ═══ DECKS / POPULAR SECTIONS ═══ */
+      .decks-section,
+      .popular-section {
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -362,31 +350,35 @@
         padding: 0 clamp(16px, 2%, 32px);
       }
 
-      .decks-wrapper {
+      .decks-wrapper,
+      .popular-wrapper {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
       }
+      .popular-wrapper {
+        align-items: center;
+      }
 
-      .decks-title {
+      .decks-title,
+      .popular-title {
         font-size: clamp(36px, 4vw, 64px);
-        font-weight: 900;
+        font-weight: bolder;
         color: #ff582b;
         letter-spacing: 8px;
         line-height: 1;
         margin-bottom: 24px;
-        font-family: "DaMiOne-Regular", sans-serif;
+        font-family: "DaMiOne-Regular";
       }
 
-      .decks-grid {
+      .decks-grid,
+      .popular-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 311px));
         gap: 20px;
       }
 
-      /* ═══════════════════════════════
-         CARDS
-      ═══════════════════════════════ */
+      /* ═══ CARDS ═══ */
       .deck-card,
       .popular-card {
         width: 100%;
@@ -398,6 +390,16 @@
         display: flex;
         flex-direction: column;
         background: #6b3fa0;
+        transition:
+          transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+          box-shadow 0.22s ease;
+        cursor: pointer;
+      }
+
+      .deck-card:hover,
+      .popular-card:hover {
+        transform: translateY(-8px) scale(1.025);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
       }
 
       .deck-card__image,
@@ -409,6 +411,12 @@
         flex-shrink: 0;
         border-radius: 18px 18px 0 0;
         background-color: white;
+        transition: transform 0.3s ease;
+      }
+
+      .deck-card:hover .deck-card__image,
+      .popular-card:hover .popular-card__image {
+        transform: scale(1.04);
       }
 
       .deck-card__body,
@@ -458,79 +466,84 @@
         cursor: pointer;
         border: none;
         flex-shrink: 0;
+        transition:
+          background 0.18s,
+          transform 0.15s;
+        position: relative;
+      }
+
+      .deck-card__btn:hover,
+      .popular-card__btn:hover {
+        background: #c89fff;
+        transform: scale(1.1);
+      }
+      .deck-card__btn:active,
+      .popular-card__btn:active {
+        transform: scale(0.95);
       }
 
       .deck-card__btn img,
       .popular-card__btn img {
         width: 36px;
         height: 36px;
+        pointer-events: none;
       }
 
-      /* ═══════════════════════════════
-         POPULAR SECTION
-      ═══════════════════════════════ */
-      .popular-section {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        margin-top: 100px;
-        padding: 0 clamp(16px, 2%, 32px);
-      }
-
-      .popular-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .popular-title {
-        font-size: clamp(36px, 4vw, 64px);
-        font-weight: 400;
-        color: #ff582b;
-        letter-spacing: 8px;
-        line-height: 1;
-        margin-bottom: 24px;
-        font-family: "DaMiOne-Regular", sans-serif;
-      }
-
-      .popular-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 311px));
-        gap: 20px;
-      }
-
-      /* ═══════════════════════════════
-         BG DECORATIONS
-      ═══════════════════════════════ */
-      .bg-wrapper {
-        position: relative;
-      }
-
-      .bg-img-1 {
+      /* Всплывающая подсказка корзины */
+      .deck-card__btn[data-tooltip]::after,
+      .popular-card__btn[data-tooltip]::after {
+        content: attr(data-tooltip);
         position: absolute;
-        top: -2000px;
+        bottom: calc(100% + 6px);
+        left: 50%;
+        transform: translateX(-50%) scale(0.85);
+        background: rgba(0, 0, 0, 0.75);
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.15s,
+          transform 0.15s;
+      }
+      .deck-card__btn[data-tooltip]:hover::after,
+      .popular-card__btn[data-tooltip]:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
       }
 
-      .bg-img-2 {
-        position: absolute;
-        right: 0;
-        top: -2000px;
+      /* Уведомление корзины */
+      .cart-toast {
+        position: fixed;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: #ff582b;
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 14px 28px;
+        border-radius: 50px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+        z-index: 9999;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .cart-toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
       }
 
-      .bg-img-3 {
-        position: absolute;
-        top: -1250px;
-      }
-
-      .bg-img-4 {
-        position: absolute;
-        right: 0;
-        top: -1000px;
-      }
-
-      /* ═══════════════════════════════
-         TELEGRAM
-      ═══════════════════════════════ */
+      /* ═══ TELEGRAM ═══ */
       .telegram-section {
         display: flex;
         flex-direction: column;
@@ -555,75 +568,149 @@
         right: 0;
         bottom: -65px;
       }
-
       .deco-purple {
         position: absolute;
         left: 0;
         bottom: -5px;
       }
 
-      /* ═══════════════════════════════
-         FOOTER
-      ═══════════════════════════════ */
+      /* ═══ FOOTER (from file 1) ═══ */
       .footer {
         width: 100%;
-        min-height: 356px;
-        position: relative;
         background: linear-gradient(90deg, #fc562d 0%, #5a3a91 100%);
         color: #dfdfdf;
-        font-size: 25px;
         font-family: "Open Sans", sans-serif;
         font-weight: 400;
-        line-height: 27px;
+        box-sizing: border-box;
+        padding: 48px 0 40px;
       }
 
-      .footer__info-header { width: 329px; left: 307px; top: 31px; position: absolute; }
-      .footer__delivery    { width: 329px; left: 309px; top: 77px;  position: absolute; }
-      .footer__payment     { width: 329px; left: 308px; top: 132px; position: absolute; }
-      .footer__agreement   { width: 329px; left: 307px; top: 182px; position: absolute; }
-      .footer__privacy     { width: 329px; left: 307px; top: 227px; position: absolute; }
+      .footer__inner {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 clamp(20px, 4vw, 80px);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 36px 48px;
+        box-sizing: border-box;
+        align-items: flex-start;
+      }
 
-      .footer__support-header { width: 236px; left: 636px; top: 35px;  position: absolute; }
-      .footer__cabinet        { width: 220px; left: 640px; top: 82px;  position: absolute; }
-      .footer__bookmarks      { width: 220px; left: 639px; top: 131px; position: absolute; }
-      .footer__sitemap        { width: 220px; left: 636px; top: 182px; position: absolute; }
+      .footer__col {
+        flex: 1 1 180px;
+        min-width: 160px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        box-sizing: border-box;
+      }
 
-      .footer__extra-header { width: 220px; left: 969px; top: 33px;  position: absolute; }
-      .footer__promo        { width: 220px; left: 969px; top: 82px;  position: absolute; }
-      .footer__new          { width: 220px; left: 969px; top: 135px; position: absolute; }
+      .footer__col--contacts {
+        flex: 1 1 280px;
+        min-width: 240px;
+      }
 
-      .footer__contacts-title { width: 420px; left: 1237px; top: 35px; position: absolute; }
+      .footer__col-title {
+        font-size: 20px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 700;
+        color: #dfdfdf;
+        line-height: 1.4;
+        margin-bottom: 6px;
+      }
+
+      .footer__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+      .footer__list li {
+        font-size: 18px;
+        color: #dfdfdf;
+        line-height: 1.5;
+        cursor: pointer;
+      }
+      .footer__list li:hover {
+        text-decoration: underline;
+      }
+
+      .footer__contacts-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
 
       .footer__contact-row {
-        position: absolute;
         display: flex;
         align-items: center;
         gap: 10px;
+        font-size: 18px;
         color: #dfdfdf;
-        font-size: 25px;
-        font-family: "Open Sans", sans-serif;
-        font-weight: 400;
-        line-height: 27px;
+        line-height: 1.5;
       }
 
-      .footer__contact-row img { width: 32px; height: 32px; flex-shrink: 0; }
+      .footer__contact-row img {
+        width: 26px;
+        height: 26px;
+        flex-shrink: 0;
+        object-fit: contain;
+      }
 
-      .footer__row-phone   { left: 1237px; top: 82px; }
-      .footer__row-email   { left: 1237px; top: 133px; }
-      .footer__row-address { left: 1237px; top: 190px; flex-direction: column; align-items: flex-start; gap: 6px; }
-      .footer__row-orders  { left: 1237px; top: 287px; }
+      .footer__contact-row--address {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
 
-      .footer__address-header {
-        font-size: 25px;
-        font-family: "Open Sans", sans-serif;
+      .footer__address-label {
+        font-size: 18px;
+        font-weight: 700;
         color: #dfdfdf;
       }
 
-      /* ═══════════════════════════════════════════════════
-         RESPONSIVE MEDIA QUERIES  (mirrors FILE #1 logic)
-      ═══════════════════════════════════════════════════ */
+      .footer__address-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .footer__address-row img {
+        width: 26px;
+        height: 26px;
+        flex-shrink: 0;
+        object-fit: contain;
+      }
 
-      /* ── 1600px: Large laptops ── */
+      /* ═══ BG DECORATIONS ═══ */
+      .bg-wrapper {
+        position: relative;
+      }
+      .bg-img-1 {
+        position: absolute;
+        top: -2000px;
+      }
+      .bg-img-2 {
+        position: absolute;
+        right: 0;
+        top: -2000px;
+      }
+      .bg-img-3 {
+        position: absolute;
+        top: -1250px;
+      }
+      .bg-img-4 {
+        position: absolute;
+        right: 0;
+        top: -1000px;
+      }
+
+      /* ═══ RESPONSIVE ═══ */
+
       @media (max-width: 1600px) {
         .site-header {
           width: clamp(900px, 80%, 1200px);
@@ -636,35 +723,32 @@
           font-size: 20px;
           letter-spacing: 2px;
         }
-
         .hero-section-blog {
           height: clamp(500px, 49vw, 787px);
           margin-top: clamp(60px, 7.5vw, 120px);
         }
-
         .decks-section,
         .popular-section {
           padding: 0 clamp(16px, 2vw, 40px);
           margin-top: clamp(60px, 6.25vw, 100px);
         }
-
         .decks-grid,
         .popular-grid {
-          grid-template-columns: repeat(4, minmax(0, clamp(240px, 19vw, 311px)));
+          grid-template-columns: repeat(
+            4,
+            minmax(0, clamp(240px, 19vw, 311px))
+          );
           gap: clamp(14px, 1.3vw, 20px);
         }
-
         .deck-card,
         .popular-card {
           height: auto;
           min-height: 420px;
         }
-
         .deck-card__image,
         .popular-card__image {
           height: clamp(200px, 17vw, 273px);
         }
-
         .deck-card__name,
         .popular-card__name,
         .deck-card__price,
@@ -672,25 +756,45 @@
           font-size: clamp(18px, 1.56vw, 25px);
           line-height: 1.4;
         }
-
         .decks-title,
         .popular-title {
           font-size: clamp(44px, 4vw, 64px);
           letter-spacing: clamp(5px, 0.5vw, 8px);
+          font-weight: bolder;
         }
-
         .load-more-btn {
           font-size: clamp(18px, 1.56vw, 25px);
           height: clamp(64px, 5.25vw, 84px);
           margin-top: clamp(60px, 6.25vw, 100px);
         }
-
         .telegram-text {
           font-size: clamp(18px, 1.7vw, 27px);
         }
+        .footer__col-title {
+          font-size: 18px;
+        }
+        .footer__list li,
+        .footer__contact-row,
+        .footer__address-label {
+          font-size: 16px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       }
 
-      /* ── 1440px: Common laptop ── */
       @media (max-width: 1440px) {
         .site-header {
           width: clamp(860px, 78%, 1100px);
@@ -703,25 +807,56 @@
           font-size: 19px;
           letter-spacing: 1.8px;
         }
-
         .hero-section-blog {
           height: clamp(440px, 46vw, 700px);
           margin-top: clamp(50px, 6vw, 100px);
         }
-
         .decks-grid,
         .popular-grid {
-          grid-template-columns: repeat(4, minmax(0, clamp(210px, 17vw, 280px)));
+          grid-template-columns: repeat(
+            4,
+            minmax(0, clamp(210px, 17vw, 280px))
+          );
         }
-
-
-  .bg-wrapper {
+        .bg-wrapper {
           display: none;
         }
+        .footer__inner {
+          gap: 28px 36px;
+        }
+        .footer__col-title {
+          font-size: 17px;
+        }
+        .footer__list li,
+        .footer__contact-row,
+        .footer__address-label {
+          font-size: 15px;
+        }
 
+
+
+
+.hero-logo {
+width: 400px;
+}
+
+ .hero-photo-left  {
+width: 490px;
+}
+ 
+     
+ .hero-photo-right  {
+width: 490px;
+}
+
+.hero-title {
+font-size: 35px;
+}
+
+
+        
       }
 
-      /* ── 1366px: Common laptop ── */
       @media (max-width: 1366px) {
         .site-header {
           width: clamp(820px, 76%, 1040px);
@@ -734,40 +869,36 @@
           font-size: 17px;
           letter-spacing: 1.5px;
         }
-
         .hero-section-blog {
           height: clamp(400px, 43vw, 640px);
           margin-top: clamp(40px, 5vw, 90px);
         }
-
         .decks-grid,
         .popular-grid {
-          grid-template-columns: repeat(4, minmax(0, clamp(190px, 16vw, 260px)));
+          grid-template-columns: repeat(
+            4,
+            minmax(0, clamp(190px, 16vw, 260px))
+          );
         }
-
         .decks-title,
         .popular-title {
           font-size: clamp(36px, 3.5vw, 54px);
           letter-spacing: 5px;
         }
-
         .deck-card__name,
         .popular-card__name,
         .deck-card__price,
         .popular-card__price {
           font-size: clamp(16px, 1.4vw, 22px);
         }
-
         .load-more-btn {
           font-size: clamp(16px, 1.4vw, 22px);
         }
-
         .telegram-text {
           font-size: clamp(16px, 1.4vw, 22px);
         }
       }
 
-      /* ── 1280px: Compact laptops ── */
       @media (max-width: 1280px) {
         .site-header {
           width: clamp(780px, 82%, 1050px);
@@ -788,67 +919,52 @@
           width: 30px;
           height: 31px;
         }
-
         .hero-section-blog {
           height: clamp(360px, 40vw, 580px);
           margin-top: clamp(30px, 4vw, 80px);
         }
-        .hero-photo-left,
-        .hero-photo-right {
-          max-height: clamp(280px, 35vw, 500px);
-          object-fit: contain;
-        }
-        .hero-title {
-          font-size: clamp(28px, 2.5vw, 40px);
-        }
-
         .decks-grid,
         .popular-grid {
-          grid-template-columns: repeat(4, minmax(0, clamp(170px, 15vw, 240px)));
+          grid-template-columns: repeat(
+            4,
+            minmax(0, clamp(170px, 15vw, 240px))
+          );
           gap: clamp(12px, 1vw, 16px);
         }
-
         .deck-card__image,
         .popular-card__image {
           height: clamp(160px, 14vw, 220px);
         }
-
         .decks-title,
         .popular-title {
           font-size: clamp(32px, 3.2vw, 48px);
           letter-spacing: 5px;
         }
-
         .deck-card__name,
         .popular-card__name,
         .deck-card__price,
         .popular-card__price {
           font-size: clamp(14px, 1.25vw, 20px);
         }
-
         .deck-card__btn,
         .popular-card__btn {
           width: clamp(42px, 4vw, 56px);
           height: clamp(38px, 3.6vw, 51px);
         }
-
         .deck-card__btn img,
         .popular-card__btn img {
           width: clamp(24px, 2.5vw, 36px);
           height: clamp(24px, 2.5vw, 36px);
         }
-
         .load-more-btn {
           font-size: clamp(14px, 1.25vw, 20px);
           height: clamp(56px, 5vw, 76px);
           margin-top: clamp(50px, 5vw, 80px);
         }
-
         .telegram-text {
           font-size: clamp(14px, 1.25vw, 20px);
           width: clamp(420px, 55vw, 700px);
         }
-
         .btn-blog {
           width: 170px;
           height: 54px;
@@ -858,7 +974,6 @@
         }
       }
 
-      /* ── 1200px: Transition zone ── */
       @media (max-width: 1200px) {
         .site-header {
           width: 100%;
@@ -872,39 +987,35 @@
           font-size: 15px;
           letter-spacing: 1px;
         }
-
         .hero-section-blog {
           height: clamp(300px, 36vw, 520px);
           margin-top: clamp(24px, 3vw, 60px);
         }
-
         .navbar {
           padding: 0 clamp(20px, 3vw, 40px);
         }
-
         .decks-section,
         .popular-section {
           padding: 0 clamp(20px, 3vw, 40px);
           margin-top: clamp(50px, 5vw, 80px);
         }
-
         .decks-grid,
         .popular-grid {
-          grid-template-columns: repeat(4, minmax(0, clamp(150px, 14vw, 220px)));
+          grid-template-columns: repeat(
+            4,
+            minmax(0, clamp(150px, 14vw, 220px))
+          );
           gap: 12px;
         }
-
         .deck-card__image,
         .popular-card__image {
           height: clamp(140px, 13vw, 200px);
         }
-
         .decks-title,
         .popular-title {
           font-size: clamp(28px, 2.8vw, 40px);
           letter-spacing: 4px;
         }
-
         .deck-card__name,
         .popular-card__name,
         .deck-card__price,
@@ -912,7 +1023,6 @@
           font-size: clamp(13px, 1.1vw, 18px);
           line-height: 1.4;
         }
-
         .deck-card__btn,
         .popular-card__btn {
           width: 38px;
@@ -923,64 +1033,60 @@
           width: 22px;
           height: 22px;
         }
-
         .telegram-text {
           font-size: clamp(13px, 1.1vw, 18px);
           width: clamp(360px, 50vw, 600px);
         }
+        .footer__inner {
+          gap: 24px 28px;
+        }
+        .footer__col {
+          flex: 1 1 160px;
+          min-width: 140px;
+        }
+        .footer__col--contacts {
+          flex: 1 1 220px;
+        }
+        .footer__col-title {
+          font-size: 16px;
+        }
+        .footer__list li,
+        .footer__contact-row,
+        .footer__address-label {
+          font-size: 14px;
+        }
+        .footer__contact-row img,
+        .footer__address-row img {
+          width: 20px;
+          height: 20px;
+        }
 
-        /* footer becomes grid at 1200 — mirrors FILE #1 */
-        .footer {
-          height: auto;
-          font-size: 16px;
-          padding: 30px clamp(20px, 3vw, 40px);
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 8px 20px;
-        }
-        .footer__info-header,
-        .footer__delivery,
-        .footer__payment,
-        .footer__agreement,
-        .footer__privacy,
-        .footer__support-header,
-        .footer__cabinet,
-        .footer__bookmarks,
-        .footer__sitemap,
-        .footer__extra-header,
-        .footer__promo,
-        .footer__new,
-        .footer__contacts-title,
-        .footer__contact-row {
-          position: static;
-          width: auto;
-        }
-        .footer__contacts-title {
-          grid-column: 4;
-          grid-row: 1;
-          font-size: 16px;
-        }
-        .footer__row-phone  { grid-column: 4; grid-row: 2; }
-        .footer__row-email  { grid-column: 4; grid-row: 3; }
-        .footer__row-address{ grid-column: 4; grid-row: 4; }
-        .footer__row-orders { grid-column: 4; grid-row: 5; }
-        .footer__contact-row { font-size: 14px; }
-        .footer__contact-row img { width: 20px; height: 20px; }
-        .footer__info-header,
-        .footer__support-header,
-        .footer__extra-header { font-weight: 700; font-size: 15px; }
-        .footer__delivery,
-        .footer__payment,
-        .footer__agreement,
-        .footer__privacy,
-        .footer__cabinet,
-        .footer__bookmarks,
-        .footer__sitemap,
-        .footer__promo,
-        .footer__new { font-size: 14px; }
+
+
+
+.hero-logo {
+width: 290px;
+}
+
+ .hero-photo-left  {
+width: 450px;
+}
+ 
+     
+ .hero-photo-right  {
+width: 450px;
+}
+
+.hero-title {
+font-size: 35px;
+}
+
+
+
+
+
       }
 
-      /* ── 1024px: iPad Pro landscape / small laptop ── */
       @media (max-width: 1024px) {
         .site-header {
           width: 100%;
@@ -1003,7 +1109,6 @@
           width: 28px;
           height: 29px;
         }
-
         .navbar {
           padding: 0 clamp(16px, 2.5vw, 30px);
           height: auto;
@@ -1023,7 +1128,6 @@
           width: 44px;
           height: 44px;
         }
-
         .hero-section-blog {
           height: clamp(260px, 32vw, 460px);
           margin-top: 20px;
@@ -1043,31 +1147,26 @@
         .btn-cta__text {
           font-size: 18px;
         }
-
         .decks-section,
         .popular-section {
           margin-top: clamp(40px, 5vw, 70px);
           padding: 0 clamp(16px, 2.5vw, 30px);
         }
-
         .decks-grid,
         .popular-grid {
           grid-template-columns: repeat(2, minmax(0, 311px));
           gap: 20px;
         }
-
         .deck-card,
         .popular-card {
           max-width: 100%;
           height: auto;
           min-height: 380px;
         }
-
         .deck-card__image,
         .popular-card__image {
           height: clamp(160px, 22vw, 260px);
         }
-
         .deck-card__name,
         .popular-card__name,
         .deck-card__price,
@@ -1075,19 +1174,16 @@
           font-size: clamp(14px, 1.4vw, 20px);
           line-height: 1.5;
         }
-
         .decks-title,
         .popular-title {
           font-size: clamp(28px, 3.5vw, 46px);
           letter-spacing: 4px;
         }
-
         .load-more-btn {
           font-size: clamp(14px, 1.4vw, 20px);
           height: 72px;
           margin-top: clamp(40px, 4.5vw, 70px);
         }
-
         .telegram-section {
           padding: 40px clamp(16px, 2.5vw, 30px) 60px;
         }
@@ -1101,66 +1197,34 @@
         .deco-purple {
           display: none;
         }
-
         .bg-wrapper {
           display: none;
         }
-
-        /* footer 3-col at 1024 — mirrors FILE #1 */
         .footer {
-          height: auto;
-          font-size: 15px;
-          padding: 28px clamp(16px, 3vw, 36px);
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: 6px 24px;
+          padding: 32px 0;
         }
-        .footer__info-header,
-        .footer__delivery,
-        .footer__payment,
-        .footer__agreement,
-        .footer__privacy,
-        .footer__support-header,
-        .footer__cabinet,
-        .footer__bookmarks,
-        .footer__sitemap,
-        .footer__extra-header,
-        .footer__promo,
-        .footer__new,
-        .footer__contacts-title,
-        .footer__contact-row {
-          position: static;
-          width: auto;
+        .footer__inner {
+          gap: 20px 24px;
+          padding: 0 clamp(16px, 3vw, 40px);
         }
-        .footer__contacts-title {
-          grid-column: 1 / -1;
-          margin-top: 16px;
+        .footer__col {
+          flex: 1 1 42%;
+          min-width: 140px;
+        }
+        .footer__col--contacts {
+          flex: 1 1 42%;
+          min-width: 200px;
+        }
+        .footer__col-title {
           font-size: 15px;
         }
-        .footer__contact-row {
-          grid-column: 1 / -1;
+        .footer__list li,
+        .footer__contact-row,
+        .footer__address-label {
           font-size: 14px;
         }
-        .footer__contact-row img { width: 20px; height: 20px; }
-        .footer__info-header,
-        .footer__support-header,
-        .footer__extra-header {
-          font-weight: 700;
-          margin-top: 10px;
-          font-size: 15px;
-        }
-        .footer__delivery,
-        .footer__payment,
-        .footer__agreement,
-        .footer__privacy,
-        .footer__cabinet,
-        .footer__bookmarks,
-        .footer__sitemap,
-        .footer__promo,
-        .footer__new { font-size: 13px; }
       }
 
-      /* ── 820px: iPad Air ── */
       @media (max-width: 820px) {
         .site-header {
           height: auto;
@@ -1208,7 +1272,6 @@
           width: 32px;
           height: 33px;
         }
-
         .navbar {
           padding: 0 20px;
           flex-wrap: wrap;
@@ -1219,7 +1282,6 @@
         .navbar__search {
           width: clamp(180px, 55vw, 360px);
         }
-
         .hero-section-blog {
           height: clamp(220px, 30vw, 380px);
           margin-top: 16px;
@@ -1239,31 +1301,26 @@
         .btn-cta__text {
           font-size: 17px;
         }
-
         .decks-section,
         .popular-section {
           margin-top: 40px;
           padding: 0 20px;
         }
-
         .decks-grid,
         .popular-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 16px;
         }
-
         .deck-card,
         .popular-card {
           max-width: 100%;
           height: auto;
           min-height: 0;
         }
-
         .deck-card__image,
         .popular-card__image {
           height: clamp(140px, 20vw, 200px);
         }
-
         .deck-card__name,
         .popular-card__name,
         .deck-card__price,
@@ -1271,7 +1328,6 @@
           font-size: 16px;
           line-height: 22px;
         }
-
         .deck-card__btn,
         .popular-card__btn {
           width: 44px;
@@ -1282,20 +1338,17 @@
           width: 26px;
           height: 26px;
         }
-
         .decks-title,
         .popular-title {
           font-size: 30px;
           letter-spacing: 4px;
         }
-
         .load-more-btn {
           font-size: 18px;
           height: 68px;
           margin-top: 40px;
           width: clamp(200px, 60vw, 360px);
         }
-
         .telegram-section {
           padding: 36px 20px 56px;
         }
@@ -1304,16 +1357,47 @@
           line-height: 24px;
           width: 100%;
         }
-
         .footer {
-          grid-template-columns: 1fr 1fr;
-          gap: 6px 20px;
-          padding: 24px 20px;
+          padding: 28px 0;
         }
-        .footer__contact-row { font-size: 14px; }
+        .footer__inner {
+          gap: 18px 20px;
+          padding: 0 20px;
+        }
+        .footer__col {
+          flex: 1 1 44%;
+          min-width: 130px;
+        }
+        .footer__col--contacts {
+          flex: 1 1 100%;
+        }
+        .footer__col-title {
+          font-size: 15px;
+          margin-bottom: 2px;
+        }
+        .footer__list li,
+        .footer__contact-row,
+        .footer__address-label {
+          font-size: 14px;
+        }
+        .footer__contacts-list {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 12px 32px;
+        }
+        .footer__contact-row--address {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+
+
+        .hero-logo {
+          margin-top: 10px;
+        width: 200px;
+        }
       }
 
-      /* ── 768px: iPad ── */
       @media (max-width: 768px) {
         .hero-section-blog {
           height: auto;
@@ -1333,7 +1417,6 @@
         .hero-title {
           font-size: 26px;
         }
-
         .navbar {
           flex-direction: column;
           align-items: flex-start;
@@ -1348,17 +1431,14 @@
           flex: 1;
           width: auto;
         }
-
         .decks-grid,
         .popular-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
-
         .deck-card__image,
         .popular-card__image {
           height: 180px;
         }
-
         .deck-card__name,
         .popular-card__name,
         .deck-card__price,
@@ -1366,19 +1446,31 @@
           font-size: 16px;
           line-height: 22px;
         }
-
-        .footer {
-          grid-template-columns: 1fr 1fr;
-          padding: 24px 16px;
+        .footer__inner {
+          flex-direction: column;
+          gap: 16px;
+          padding: 0 20px;
+        }
+        .footer__col,
+        .footer__col--contacts {
+          flex: none;
+          width: 100%;
+          min-width: unset;
+        }
+        .footer__contacts-list {
+          flex-direction: column;
+          gap: 10px;
+        }
+        .footer__col-title {
+          font-size: 15px;
+        }
+        .footer__list li,
+        .footer__contact-row,
+        .footer__address-label {
           font-size: 14px;
         }
-        .footer__contact-row { font-size: 14px; }
-        .footer__info-header,
-        .footer__support-header,
-        .footer__extra-header { font-size: 14px; }
       }
 
-      /* ── 480px: Large phones ── */
       @media (max-width: 480px) {
         .site-header {
           padding: 12px 16px;
@@ -1391,14 +1483,12 @@
           width: 28px;
           height: 22px;
         }
-
         .navbar {
           padding: 8px 16px;
         }
         .navbar__search {
           width: 100%;
         }
-
         .hero-section-blog {
           min-height: 180px;
           padding: 24px 16px;
@@ -1413,36 +1503,30 @@
         .btn-cta__text {
           font-size: 16px;
         }
-
         .decks-section,
         .popular-section {
           padding: 0 16px;
           margin-top: 32px;
         }
-
         .decks-grid,
         .popular-grid {
           grid-template-columns: 1fr;
           justify-items: center;
         }
-
         .deck-card,
         .popular-card {
           max-width: 320px;
           width: 100%;
         }
-
         .deck-card__image,
         .popular-card__image {
           height: 180px;
         }
-
         .decks-title,
         .popular-title {
           font-size: 26px;
           letter-spacing: 2px;
         }
-
         .deck-card__name,
         .popular-card__name,
         .deck-card__price,
@@ -1450,7 +1534,6 @@
           font-size: 15px;
           line-height: 22px;
         }
-
         .load-more-btn {
           width: 100%;
           max-width: 320px;
@@ -1458,21 +1541,43 @@
           height: 60px;
           margin-top: 32px;
         }
-
         .telegram-text {
           font-size: 15px;
           line-height: 22px;
         }
-
         .footer {
-          grid-template-columns: 1fr;
-          gap: 5px;
-          padding: 20px 16px;
+          padding: 24px 0;
         }
-        .footer__contact-row { font-size: 14px; }
+        .footer__inner {
+          flex-direction: column;
+          gap: 16px;
+          padding: 0 16px;
+        }
+        .footer__col,
+        .footer__col--contacts {
+          flex: none;
+          width: 100%;
+          min-width: unset;
+        }
+        .footer__contacts-list {
+          flex-direction: column;
+          gap: 10px;
+        }
+        .footer__col-title {
+          font-size: 14px;
+        }
+        .footer__list li,
+        .footer__contact-row,
+        .footer__address-label {
+          font-size: 13px;
+        }
+        .footer__contact-row img,
+        .footer__address-row img {
+          width: 18px;
+          height: 18px;
+        }
       }
 
-      /* ── 430px ── */
       @media (max-width: 430px) {
         .site-header {
           padding: 10px 14px;
@@ -1499,43 +1604,18 @@
           padding: 20px 14px;
         }
         .footer {
-          padding: 20px 14px;
+          padding: 20px 0;
         }
-        .footer__contact-row img { width: 22px; height: 22px; }
-        .footer__contact-row,
-        .footer__info-header,
-        .footer__support-header,
-        .footer__extra-header { font-size: 14px; }
-      }
-
-      /* ── 390px ── */
-      @media (max-width: 390px) {
-        .decks-title,
-        .popular-title {
-          font-size: 23px;
-          letter-spacing: 1.5px;
+        .footer__inner {
+          padding: 0 14px;
         }
-        .deck-card__name,
-        .popular-card__name,
-        .deck-card__price,
-        .popular-card__price {
-          font-size: 14px;
-          line-height: 20px;
-        }
-        .hero-title {
-          font-size: 20px;
-        }
-        .telegram-text {
-          font-size: 13px;
-          line-height: 20px;
-        }
-        .load-more-btn {
-          font-size: 14px;
-          height: 54px;
+        .footer__contact-row img,
+        .footer__address-row img {
+          width: 18px;
+          height: 18px;
         }
       }
 
-      /* ── 375px ── */
       @media (max-width: 375px) {
         .logo-accent {
           width: 54px;
@@ -1582,9 +1662,25 @@
           font-size: 13px;
           line-height: 20px;
         }
+        .footer__inner {
+          padding: 0 12px;
+        }
+        .footer__col-title {
+          font-size: 13px;
+        }
+        .footer__list li,
+        .footer__contact-row,
+        .footer__address-label {
+          font-size: 13px;
+          line-height: 20px;
+        }
+        .footer__contact-row img,
+        .footer__address-row img {
+          width: 16px;
+          height: 16px;
+        }
       }
 
-      /* ── 360px ── */
       @media (max-width: 360px) {
         .logo-accent {
           width: 50px;
@@ -1603,16 +1699,31 @@
           height: 50px;
         }
         .footer {
-          padding: 18px 12px;
+          padding: 18px 0;
         }
+        .footer__inner {
+          padding: 0 10px;
+          gap: 12px;
+        }
+        .footer__col-title {
+          font-size: 13px;
+        }
+        .footer__list li,
         .footer__contact-row,
-        .footer__info-header,
-        .footer__support-header,
-        .footer__extra-header { font-size: 13px; }
-        .footer__contact-row img { width: 20px; height: 20px; }
+        .footer__address-label {
+          font-size: 12px;
+          line-height: 1.5;
+        }
+        .footer__contact-row img,
+        .footer__address-row img {
+          width: 16px;
+          height: 16px;
+        }
+        .footer__contacts-list {
+          gap: 8px;
+        }
       }
 
-      /* ── 320px ── */
       @media (max-width: 320px) {
         .logo-accent {
           width: 46px;
@@ -1678,33 +1789,44 @@
           line-height: 18px;
         }
         .footer {
-          padding: 16px 10px;
-          gap: 4px;
+          padding: 16px 0;
         }
+        .footer__inner {
+          padding: 0 10px;
+          gap: 10px;
+        }
+        .footer__col-title {
+          font-size: 12px;
+        }
+        .footer__list li,
         .footer__contact-row,
-        .footer__info-header,
-        .footer__support-header,
-        .footer__extra-header { font-size: 12px; }
-        .footer__contact-row img { width: 18px; height: 18px; }
+        .footer__address-label {
+          font-size: 12px;
+          line-height: 18px;
+        }
+        .footer__contact-row img,
+        .footer__address-row img {
+          width: 14px;
+          height: 14px;
+        }
       }
     </style>
   </head>
 
   <body>
     <div class="root">
-
       <header class="site-header">
         <div class="logo-accent">
-          <img src="logo.png" alt="Boardwave logo" />
+       <a href="index.html">    <img src="logo.png" alt="Boardwave logo" /></a>
         </div>
         <button class="burger-menu" id="burgerBtn" aria-label="Открыть меню">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span></span><span></span><span></span>
         </button>
         <div class="nav-overlay" id="navOverlay"></div>
         <nav class="site-nav" id="mainNav">
-          <button class="nav-close" id="navClose" aria-label="Закрыть меню">&times;</button>
+          <button class="nav-close" id="navClose" aria-label="Закрыть меню">
+            &times;
+          </button>
           <span>О нас</span>
           <span>Каталог</span>
           <span>Отзывы</span>
@@ -1751,49 +1873,114 @@
           <h2 class="decks-title">Деки</h2>
           <div class="decks-grid">
             <article class="deck-card">
-              <img class="deck-card__image" src="deck1.png" alt="Дека Rosy blush" />
+              <img
+                class="deck-card__image"
+                src="deck1.jpg"
+                alt="Дека Rosy blush"
+              />
               <div class="deck-card__body">
                 <p class="deck-card__name">Дека Rosy blush</p>
                 <span class="deck-card__price">3 300 ₽</span>
                 <div class="deck-card__actions">
-                  <button class="deck-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="deck-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="deck-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Дека Rosy blush"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="deck-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="deck-card">
-              <img class="deck-card__image" src="deck2.png" alt="Дека Arctic wave" />
+              <img
+                class="deck-card__image"
+                src="deck2.jpg"
+                alt="Дека Arctic wave"
+              />
               <div class="deck-card__body">
                 <p class="deck-card__name">Дека Arctic wave</p>
                 <span class="deck-card__price">3 800 ₽</span>
                 <div class="deck-card__actions">
-                  <button class="deck-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="deck-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="deck-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Дека Arctic wave"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="deck-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="deck-card">
-              <img class="deck-card__image" src="deck3.png" alt="Дека Forest green" />
+              <img
+                class="deck-card__image"
+                src="deck3.jpg"
+                alt="Дека Forest green"
+              />
               <div class="deck-card__body">
                 <p class="deck-card__name">Дека Forest green</p>
                 <span class="deck-card__price">4 100 ₽</span>
                 <div class="deck-card__actions">
-                  <button class="deck-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="deck-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="deck-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Дека Forest green"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="deck-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="deck-card">
-              <img class="deck-card__image" src="deck4.png" alt="Дека Midnight smoke" />
+              <img
+                class="deck-card__image"
+                src="deck4.jpg"
+                alt="Дека Midnight smoke"
+              />
               <div class="deck-card__body">
                 <p class="deck-card__name">Дека Midnight smoke</p>
                 <span class="deck-card__price">3 600 ₽</span>
                 <div class="deck-card__actions">
-                  <button class="deck-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="deck-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="deck-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Дека Midnight smoke"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="deck-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
@@ -1806,103 +1993,233 @@
           <h2 class="popular-title">Популярные товары</h2>
           <div class="popular-grid">
             <article class="popular-card">
-              <img class="popular-card__image" src="product1.png" alt="Набор подшипников" />
+              <img
+                class="popular-card__image"
+                src="product1.jpg"
+                alt="Набор подшипников"
+              />
               <div class="popular-card__body">
-                <p class="popular-card__name">Набор сиренево-золотых подшипников</p>
+                <p class="popular-card__name">
+                  Набор сиренево-золотых подшипников
+                </p>
                 <span class="popular-card__price">2 550 ₽</span>
                 <div class="popular-card__actions">
-                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Набор подшипников сиренево-золотых"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="popular-card">
-              <img class="popular-card__image" src="product2.png" alt="Скейтборд China Jam" />
+              <img
+                class="popular-card__image"
+                src="product2.jpg"
+                alt="Скейтборд China Jam"
+              />
               <div class="popular-card__body">
                 <p class="popular-card__name">Скейтборд China Jam</p>
                 <span class="popular-card__price">7 800 ₽</span>
                 <div class="popular-card__actions">
-                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Скейтборд China Jam"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="popular-card">
-              <img class="popular-card__image" src="product3.png" alt="Скейтборд Jart Involution" />
+              <img
+                class="popular-card__image"
+                src="product3.jpg"
+                alt="Скейтборд Jart Involution"
+              />
               <div class="popular-card__body">
                 <p class="popular-card__name">Скейтборд Jart Involution</p>
                 <span class="popular-card__price">10 500 ₽</span>
                 <div class="popular-card__actions">
-                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Скейтборд Jart Involution"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="popular-card">
-              <img class="popular-card__image" src="product4.png" alt="Набор из 4 колёс" />
+              <img
+                class="popular-card__image"
+                src="product4.jpg"
+                alt="Набор из 4 колёс"
+              />
               <div class="popular-card__body">
                 <p class="popular-card__name">Набор из 4 колёс</p>
                 <span class="popular-card__price">1 950 ₽</span>
                 <div class="popular-card__actions">
-                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Набор из 4 колёс"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="popular-card">
-              <img class="popular-card__image" src="product5.png" alt="Скейтборд Green psychedalics" />
+              <img
+                class="popular-card__image"
+                src="product5.jpg"
+                alt="Скейтборд Green psychedalics"
+              />
               <div class="popular-card__body">
                 <p class="popular-card__name">Скейтборд Green psychedalics</p>
                 <span class="popular-card__price">9 500 ₽</span>
                 <div class="popular-card__actions">
-                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Скейтборд Green psychedalics"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="popular-card">
-              <img class="popular-card__image" src="product6.png" alt="Дека Memdog" />
+              <img
+                class="popular-card__image"
+                src="product6.jpg"
+                alt="Дека Memdog"
+              />
               <div class="popular-card__body">
                 <p class="popular-card__name">Дека Memdog</p>
                 <span class="popular-card__price">4 100 ₽</span>
                 <div class="popular-card__actions">
-                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Дека Memdog"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="popular-card">
-              <img class="popular-card__image" src="product7.png" alt="Набор фиолетовых подшипников" />
+              <img
+                class="popular-card__image"
+                src="product7.jpg"
+                alt="Набор фиолетовых подшипников"
+              />
               <div class="popular-card__body">
                 <p class="popular-card__name">Набор фиолетовых подшипников</p>
                 <span class="popular-card__price">2 800 ₽</span>
                 <div class="popular-card__actions">
-                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Набор фиолетовых подшипников"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
-
             <article class="popular-card">
-              <img class="popular-card__image" src="product8.png" alt="Набор для сборки скейтборда" />
+              <img
+                class="popular-card__image"
+                src="product8.jpg"
+                alt="Набор для сборки скейтборда"
+              />
               <div class="popular-card__body">
                 <p class="popular-card__name">Набор для сборки скейтборда</p>
                 <span class="popular-card__price">9 990 ₽</span>
                 <div class="popular-card__actions">
-                  <button class="popular-card__btn" aria-label="В корзину"><img src="shop.png" alt="" /></button>
-                  <button class="popular-card__btn" aria-label="В избранное"><img src="favorits.png" alt="" /></button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В корзину"
+                    data-name="Набор для сборки скейтборда"
+                    onclick="addToCart(this)"
+                  >
+                    <img src="shop.png" alt="В корзину" />
+                  </button>
+                  <button
+                    class="popular-card__btn"
+                    data-tooltip="В избранное"
+                    onclick="toggleFav(this)"
+                  >
+                    <img src="favorits.png" alt="В избранное" />
+                  </button>
                 </div>
               </div>
             </article>
           </div>
         </div>
-
         <button class="load-more-btn">Загрузить ещё 50+</button>
       </section>
 
@@ -1916,51 +2233,75 @@
       <div class="telegram-section">
         <div class="deco-orange"><img src="deko_orange.png" alt="" /></div>
         <div class="deco-purple"><img src="deko_purple.png" alt="" /></div>
+        <div class="telegram-text">
+          У нас также есть канал в телеграме, где мы делимся актуальными
+          новостями:
+        </div>
+        <button class="btn-blog">
+          <span class="btn-blog__text">Блог</span>
+        </button>
       </div>
 
+      <!-- FOOTER из файла 1 -->
       <footer class="footer">
-        <div class="footer__info-header">Информация</div>
-        <div class="footer__delivery">Доставка</div>
-        <div class="footer__payment">Оплата</div>
-        <div class="footer__agreement">Условия соглашения</div>
-        <div class="footer__privacy">Политика безопасности</div>
+        <div class="footer__inner">
+          <div class="footer__col">
+            <div class="footer__col-title">Информация</div>
+            <ul class="footer__list">
+              <li>Доставка</li>
+              <li>Оплата</li>
+              <li>Условия соглашения</li>
+              <li>Политика безопасности</li>
+            </ul>
+          </div>
 
-        <div class="footer__support-header">Служба поддержки</div>
-        <div class="footer__cabinet">Личный кабинет</div>
-        <div class="footer__bookmarks">Закладки</div>
-        <div class="footer__sitemap">Карта сайта</div>
+          <div class="footer__col">
+            <div class="footer__col-title">Служба поддержки</div>
+            <ul class="footer__list">
+              <li>Личный кабинет</li>
+              <li>Закладки</li>
+              <li>Карта сайта</li>
+            </ul>
+          </div>
 
-        <div class="footer__extra-header">Дополнительно</div>
-        <div class="footer__promo">Акции</div>
-        <div class="footer__new">Новинки</div>
+          <div class="footer__col">
+            <div class="footer__col-title">Дополнительно</div>
+            <ul class="footer__list">
+              <li>Акции</li>
+              <li>Новинки</li>
+            </ul>
+          </div>
 
-        <div class="footer__contacts-title">Наши контакты:</div>
-
-        <div class="footer__contact-row footer__row-phone">
-          <img src="phone.png" alt="Телефон" />
-          <span>+7 (964) 828-58-11</span>
-        </div>
-
-        <div class="footer__contact-row footer__row-email">
-          <img src="mail.png" alt="Email" />
-          <span>boardwave@contact.ru</span>
-        </div>
-
-        <div class="footer__contact-row footer__row-address">
-          <span class="footer__address-header">Наш адрес:</span>
-          <div style="display: flex; align-items: center; gap: 10px">
-            <img src="location.png" alt="Адрес" />
-            <span>г. Москва, Малый проезд 5</span>
+          <div class="footer__col footer__col--contacts">
+            <div class="footer__col-title">Наши контакты:</div>
+            <ul class="footer__contacts-list">
+              <li class="footer__contact-row">
+                <img src="phone.png" alt="Телефон" />
+                <span>+7 (964) 828-58-11</span>
+              </li>
+              <li class="footer__contact-row">
+                <img src="mail.png" alt="Email" />
+                <span>boardwave@contact.ru</span>
+              </li>
+              <li class="footer__contact-row footer__contact-row--address">
+                <span class="footer__address-label">Наш адрес:</span>
+                <span class="footer__address-row">
+                  <img src="location.png" alt="Адрес" />
+                  <span>г. Москва, Малый проезд 5</span>
+                </span>
+              </li>
+              <li class="footer__contact-row">
+                <img src="clock.png" alt="Часы" />
+                <span>Заказы через корзину 24/7</span>
+              </li>
+            </ul>
           </div>
         </div>
-
-        <div class="footer__contact-row footer__row-orders">
-          <img src="clock.png" alt="Часы" />
-          <span>Заказы через корзину 24/7</span>
-        </div>
       </footer>
-
     </div>
+
+    <!-- Toast уведомление -->
+    <div class="cart-toast" id="cartToast"></div>
 
     <script>
       (function () {
@@ -1976,7 +2317,6 @@
           navOverlay.classList.add("active");
           body.classList.add("no-scroll");
         }
-
         function closeMenu() {
           mainNav.classList.remove("active");
           navOverlay.classList.remove("active");
@@ -1986,17 +2326,48 @@
         if (burgerBtn) burgerBtn.addEventListener("click", openMenu);
         if (navClose) navClose.addEventListener("click", closeMenu);
         if (navOverlay) navOverlay.addEventListener("click", closeMenu);
-
         navLinks.forEach(function (link) {
           link.addEventListener("click", closeMenu);
         });
-
         document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape" && mainNav.classList.contains("active")) {
+          if (e.key === "Escape" && mainNav.classList.contains("active"))
             closeMenu();
-          }
         });
       })();
+
+      var cart = [];
+      var toastTimer = null;
+
+      function addToCart(btn) {
+        var name = btn.getAttribute("data-name") || "Товар";
+        cart.push(name);
+        showToast("✓ Добавлено: " + name + " (" + cart.length + " в корзине)");
+        btn.style.background = "#7fe07f";
+        setTimeout(function () {
+          btn.style.background = "";
+        }, 900);
+      }
+
+      function toggleFav(btn) {
+        btn.classList.toggle("fav-active");
+        if (btn.classList.contains("fav-active")) {
+          btn.style.background = "#e07f7f";
+          showToast("♥ Добавлено в избранное");
+        } else {
+          btn.style.background = "";
+          showToast("Убрано из избранного");
+        }
+      }
+
+      function showToast(msg) {
+        var toast = document.getElementById("cartToast");
+        toast.textContent = msg;
+        toast.classList.add("show");
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toast.classList.remove("show");
+        }, 2500);
+      }
     </script>
   </body>
 </html>
